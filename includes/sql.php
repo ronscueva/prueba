@@ -210,12 +210,11 @@ function tableExists($table){
    /*--------------------------------------------------------------*/
   function join_product_table(){
      global $db;
-     $sql  =" SELECT p.id,p.name,p.quantity,p.buy_price,p.sale_price,p.media_id,p.date,c.name";
-    $sql  .=" AS categorie,m.file_name AS image";
+     $sql  =" SELECT p.id_produc,p.nombre,p.cantidad,p.precio_compra,p.precio_venta,p.url_img,c.nombre_categoria";
+    $sql  .=" AS categorie";
     $sql  .=" FROM empp_tb_productos p";
-    $sql  .=" LEFT JOIN empp_tb_categoria c ON c.id = p.categorie_id";
-    $sql  .=" LEFT JOIN media m ON m.id = p.media_id";
-    $sql  .=" ORDER BY p.id ASC";
+    $sql  .=" LEFT JOIN empp_tb_categoria c ON c.id = p.id_produc";
+    $sql  .=" ORDER BY p.id_produc ASC";
     return find_by_sql($sql);
 
    }
