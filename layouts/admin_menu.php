@@ -16,6 +16,16 @@
    </ul>
   </li>
   <li>
+    <a href="#" class="submenu-toggle">
+      <i class="glyphicon glyphicon-user"></i>
+      <span>Clientes</span>
+    </a>
+    <ul class="nav submenu">
+      <li><a href="registro_cliente.php">Registrar Clientes</a> </li>
+      <li><a href="reporte_cliente.php">Reporte Clientes</a> </li>
+   </ul>
+  </li>
+  <li>
     <a href="categorie.php" >
       <i class="glyphicon glyphicon-indent-left"></i>
       <span>Categorías</span>
