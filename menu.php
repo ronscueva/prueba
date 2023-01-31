@@ -232,5 +232,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="cerrar.php" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Cerrar Sesion
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
