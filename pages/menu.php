@@ -68,13 +68,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/clientes/clientes.php" class="nav-link">
+                <a href="../clientes/clientes.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Clientes</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/vendedores/vendedores.php" class="nav-link">
+                <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Vendedores</p>
                 </a>
@@ -125,13 +125,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-              <a href="pages/categorias/categoria.php" class="nav-link ">
+                <a href="../categorias/categoria.php" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Categoria principal</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/categorias/subcategoria.php" class="nav-link">
+                <a href="../categorias/subcategoria.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Subcategoria</p>
                 </a>
@@ -233,7 +233,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="cerrar.php" class="nav-link">
+            <a href="../cerrar.php" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Cerrar Sesion

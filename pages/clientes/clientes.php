@@ -200,7 +200,7 @@
       </div>
 
       <!-- Sidebar Menu -->
-   <?php include '../../menu.php' ?>
+   <?php include ('../menu.php'); ?>
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
