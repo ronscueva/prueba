@@ -110,9 +110,9 @@ function registrarcli(){
 			}else{
 			$(document).Toasts('create', {
 				class: 'bg-maroon',
-        title: 'ERROR !!!',
-        subtitle: 'Alerta',
-        body: 'Ocurrio un Error al Registrar al Cliente!!!.'
+        		title: 'ERROR !!!',
+        		subtitle: 'Alerta',
+        		body: 'Ocurrio un Error al Registrar al Cliente!!!.'
       })
 			location.reload();
 			}
