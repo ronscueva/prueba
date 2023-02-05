@@ -1,4 +1,4 @@
-      <nav class="mt-2">
+<nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
@@ -68,24 +68,29 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../clientes/clientes.php" class="nav-link">
+                <a href="pages/clientes/clientes.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Clientes</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                <a href="pages/vendedores/vendedores.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Vendedores</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                <a href="pages/proveedores/proveedores.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Proveedores</p>
                 </a>
               </li>
-            
+              <li class="nav-item">
+                <a href="pages/productos/productos.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Productos</p>
+                </a>
+              </li>
               
             </ul>
           </li>
@@ -125,13 +130,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../categorias/categoria.php" class="nav-link ">
+              <a href="pages/categorias/categoria.php" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Categoria principal</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../categorias/subcategoria.php" class="nav-link">
+                <a href="pages/categorias/subcategoria.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Subcategoria</p>
                 </a>
@@ -233,7 +238,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="../cerrar.php" class="nav-link">
+            <a href="cerrar.php" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Cerrar Sesion

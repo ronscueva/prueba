@@ -237,7 +237,7 @@
               <div class="card-header">
                 <h3 class="card-title">Listado de Productos Registrados</h3>
 
-                 <a style="margin-left: 80px;" class="btn btn-primary"  data-toggle="modal" data-target="#exampleModalCenter"><spam class="glyphicon glyphicon-plus"></spam>Nuevo Cliente</a>
+                 <a style="margin-left: 80px;" class="btn btn-primary"  data-toggle="modal" data-target="#exampleModalCenter"><spam class="glyphicon glyphicon-plus"></spam>Nuevo Producto</a>
                   <!-- REGISTRO DE CLIENTE -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -249,14 +249,28 @@
         </button>
       </div>
       <div class="modal-body">
-        <label>Ruc:</label>
-        <input type="text" class="form-control" id="rucx" placeholder="Ingrese Nro Ruc...">
-        <label>Razon Social:</label>
-        <input type="text" class="form-control" id="socialx" placeholder="Ingrese Razon Social...">
-        <label>Telefono:</label>
-        <input type="text" class="form-control" id="telx" placeholder="Ingrese Telefono...">
-        <label>Direccion:</label>
-        <input type="text" class="form-control" id="dirx" placeholder="Ingrese Direccion...">
+        <label>Codigo:</label>
+        <input type="text" class="form-control" id="dirx" placeholder="Ingrese el codigo...">
+        <label>Nombre:</label>
+        <input type="text" class="form-control" id="rucx" placeholder="Ingrese el nombre...">
+        <label>Descripcion:</label>
+        <input type="text" class="form-control" id="socialx" placeholder="Ingrese la descripcion...">
+        <label>Cantidad:</label>
+        <input type="text" class="form-control" id="telx" placeholder="Ingrese Cantidad...">
+        <label>Categoria:</label>
+        <input type="text" class="form-control" id="dirx" placeholder="Ingrese la cateogira...">
+        <label>Tipo Calidad:</label>
+        <input type="text" class="form-control" id="dirx" placeholder="Ingrese la calidad...">
+        <label>Espesor:</label>
+        <input type="text" class="form-control" id="dirx" placeholder="Ingrese Espesor...">
+        <label>Alto:</label>
+        <input type="text" class="form-control" id="dirx" placeholder="Ingrese Largo...">
+        <label>Ancho:</label>
+        <input type="text" class="form-control" id="dirx" placeholder="Ingrese ancho...">
+        <label>Precio compra:</label>
+        <input type="text" class="form-control" id="dirx" placeholder="Ingrese precio compra...">
+        <label>Precio venta:</label>
+        <input type="text" class="form-control" id="dirx" placeholder="Ingrese precio venta...">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -316,9 +330,9 @@
                     <div class="modal-body">
                        <form>
                         <input type="text" class="form-control" placeholder="" hidden="true" id="ids">
-                        <label>Ruc:</label>
+                        <label>Nombre:</label>
                         <input type="text" class="form-control" placeholder="" id="rucs">
-                        <label>Razon Social:</label>
+                        <label>Descripcion:</label>
                         <input type="text" class="form-control" placeholder="" id="nomb">
                         <label>Telefono:</label>
                         <input type="text" class="form-control" placeholder="" id="tef">
