@@ -3,9 +3,7 @@
   require_once ("../../config/conexion.php");//Contiene funcion que conecta a la base de datos
 $fun      =$_POST['funcion'];
 $id       =$_POST['id'];
-$producto =$_POST['producto'];
-$categoria=$_POST['categoria'];
-$subcat   =$_POST['subcat'];
+//$producto =$_POST['producto'];
 //echo "llegue";
 if ($fun==1){
 	//INSERTAR
@@ -25,16 +23,8 @@ if ($fun==1){
 	$buscar= mysqli_query($con,"SELECT id_produc,codigo_producto,id_categoria,id_sub_categoria,nombre,estado,espesor,alto,ancho,precio_compra,precio_venta FROM empp_tb_productos WHERE estado='1' and id_produc='$id'");
     	while ($row = mysqli_fetch_array($buscar)) {
 		$row_array['idp']=$row['id_produc'];
-		$row_array['id']=$row['codigo_producto'];
+		$row_array['codigo']=$row['codigo_producto'];
 		$row_array['nombres']=$row['nombre'];
-		$row_array['cat']=$row['id_categoria'];
-		$row_array['scat']=$row['id_sub_categoria'];
-		$row_array['estado']=$row['estado'];
-		$row_array['espesor']=$row['espesor'];
-		$row_array['alto']=$row['alto'];
-		$row_array['ancho']=$row['ancho'];
-		$row_array['compra']=$row['precio_compra'];
-		$row_array['venta']=$row['precio_venta'];
 		array_push($return_arr,$row_array);
     }
    echo json_encode($return_arr);
