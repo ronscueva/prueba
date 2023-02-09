@@ -2,17 +2,16 @@
   require_once ("../../config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
   require_once ("../../config/conexion.php");//Contiene funcion que conecta a la base de datos
 
-  $lista= mysqli_query($con,"SELECT s.id,s.nombre_sub_categoria,s.id_categoria,s.fecha_c,s.fecha_m,c.id as idcategoria ,c.nombre_categoria FROM empp_tb_sub_categoria s inner join  empp_tb_categoria c on c.id = s.id_categoria");
+  $lista= mysqli_query($con,"SELECT k.* , p.nombre FROM empp_tb_kardex k inner join empp_tb_productos p on p.id_produc = k.id_producto");
   $listado=mysqli_fetch_array($lista);
-  $lista_categoria= mysqli_query($con,"SELECT * FROM empp_tb_categoria where estado=1");
-  $listado_categoria=mysqli_fetch_array($lista_categoria);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Categoria</title>
+  <title>AdminLTE 3 | Proveedores</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -214,7 +213,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Subcategoria</h1>
+            <h1>Kardex</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -236,31 +235,28 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Listado de Subcategorias Registradas</h3>
+                <h3 class="card-title">Listado de Kardex</h3>
 
-                 <a style="margin-left: 80px;" class="btn btn-primary"  data-toggle="modal" data-target="#exampleModalCenter"><spam class="glyphicon glyphicon-plus"></spam>Nueva Categoria</a>
-                  <!-- REGISTRO DE CLIENTE -->
+                 
+                  <!-- REGISTRO DE Proveedor -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Registrar Subcategoria Nueva</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Registrar Proveedor Nuevo</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <label>Nombre de Subcategoria:</label>
-        <input type="text" class="form-control" id="nombrex" placeholder="Ingrese Nombre...">
-      </div>
-      <div class="modal-body">
-      <label>Nombre de categoria:</label>
-        <select name="cbx_estado" id="cbx_estado">
-				
-				<?php while($row = $lista_categoria->fetch_assoc()) { ?>
-					<option value="<?php echo $row['id']; ?>"><?php echo $row['nombre_categoria']; ?></option>
-				<?php } ?>
-	    </select>
+        <label>Ruc:</label>
+        <input type="text" class="form-control" id="rucx" placeholder="Ingrese Nro Ruc...">
+        <label>Razon Social:</label>
+        <input type="text" class="form-control" id="socialx" placeholder="Ingrese Razon Social...">
+        <label>Telefono:</label>
+        <input type="text" class="form-control" id="telx" placeholder="Ingrese Telefono...">
+        <label>Direccion:</label>
+        <input type="text" class="form-control" id="dirx" placeholder="Ingrese Direccion...">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -270,7 +266,7 @@
   </div>
 </div>
   <!-- FIN REGISTRO DE CLIENTE -->
- 
+    
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -278,25 +274,28 @@
                   <thead>
                   <tr>
                     <th>#</th>
-                    <th>Subcategoria</th>
-                    <th>Categoria</th>
-                    <th>Fecha de creacion</th>
-                    <th>Acciones</th>
+                    <th>codigo producto</th>
+                    <th>Producto</th>
+                    <th>Fecha</th>
+                    <th>Tipo</th>
+                    <th>Cantidad</th>
+                    <th>Saldo</th>
                   </tr>
                   </thead>
                   <tbody>
                     <?php
-                    $cont=0;
+                    $cont=1;
                     foreach ($lista as $value) {
 
                       ?>
                       <tr>
                     <td><?php echo $cont++; ?></td>
-                    <td><?php echo $value['nombre_sub_categoria']; ?></td>
-                    <td><?php echo $value['nombre_categoria']; ?></td>
-                    <td><?php echo $value['fecha_c']; ?></td>
-                    <td><a data-toggle="modal" data-target="#exampleModal" onclick="editarcli(<?php echo $value['id']; ?>)" class="btn btn-warning">Editar</a>
-                        <a data-toggle="modal" data-target=".bd-example-modal-sm" onclick="eliminarcli(<?php echo $value['id']; ?>)" class="btn btn-danger">Eliminar</a></td>
+                    <td><?php echo $value['id_producto']; ?></td>
+                    <td><?php echo $value['nombre']; ?></td>
+                    <td><?php echo $value['fecha']; ?></td>
+                    <td><?php echo $value['tipo']; ?></td>
+                    <td><?php echo $value['cantidad']; ?></td>
+                    <td><?php echo $value['saldo']; ?></td>
                   </tr>
                     <?php
                   }
@@ -310,7 +309,7 @@
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Edicion Subcategorias</h5>
+                      <h5 class="modal-title" id="exampleModalLabel">Edicion Proveedor</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -318,8 +317,14 @@
                     <div class="modal-body">
                        <form>
                         <input type="text" class="form-control" placeholder="" hidden="true" id="ids">
-                        <label>Nombre:</label>
-                        <input type="text" class="form-control" placeholder="" id="nombres">
+                        <label>Ruc:</label>
+                        <input type="text" class="form-control" placeholder="" id="rucs">
+                        <label>Razon Social:</label>
+                        <input type="text" class="form-control" placeholder="" id="nomb">
+                        <label>Telefono:</label>
+                        <input type="text" class="form-control" placeholder="" id="tef">
+                        <label>Direccion:</label>
+                        <input type="text" class="form-control" placeholder="" id="dire">
                       </form>
                     </div>
                     <div class="modal-footer">
@@ -344,7 +349,7 @@
                     </div>
                     <div class="modal-body">
                       <input type="text" id="idsx" hidden="true">
-                      <a>Esta usted Seguro de Eliminar la  Subcategorias?</a>
+                      <a>Esta usted Seguro de Eliminar el Cliente?</a>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -387,7 +392,7 @@
 
 <!-- jQuery -->
 <script src="../../plugins/jquery/jquery.min.js"></script>
-<script src="../../js/categorias.js"></script>
+<script src="../../js/proveedores.js"></script>
 <!-- Bootstrap 4 -->
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- DataTables  & Plugins -->

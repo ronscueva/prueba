@@ -119,6 +119,31 @@
              
             </ul>
           </li>
+          <!-- Compras -->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Compras
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="./index.html" class="nav-link ">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Administrar Compras</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/compras/compras.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Realizar Compras</p>
+                </a>
+              </li>
+             
+            </ul>
+          </li>
           <!-- categoria -->
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -220,7 +245,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/forms/general.html" class="nav-link">
+                <a href="pages/kardex/kardex.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Kardex General</p>
                 </a>

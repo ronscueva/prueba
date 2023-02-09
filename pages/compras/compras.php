@@ -2,17 +2,17 @@
   require_once ("../../config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
   require_once ("../../config/conexion.php");//Contiene funcion que conecta a la base de datos
 
-  $lista= mysqli_query($con,"SELECT s.id,s.nombre_sub_categoria,s.id_categoria,s.fecha_c,s.fecha_m,c.id as idcategoria ,c.nombre_categoria FROM empp_tb_sub_categoria s inner join  empp_tb_categoria c on c.id = s.id_categoria");
+  $lista= mysqli_query($con,"SELECT * FROM empp_tb_productos where estado='1'");
   $listado=mysqli_fetch_array($lista);
-  $lista_categoria= mysqli_query($con,"SELECT * FROM empp_tb_categoria where estado=1");
-  $listado_categoria=mysqli_fetch_array($lista_categoria);
+  $prove= mysqli_query($con,"SELECT * FROM empp_tb_proveedores");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Categoria</title>
+  <title>AdminLTE 3 | Productos</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -214,7 +214,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Subcategoria</h1>
+            <h1>Compras</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -236,52 +236,92 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Listado de Subcategorias Registradas</h3>
+                <h3 class="card-title">Listado de Compras Registrados</h3>
 
-                 <a style="margin-left: 80px;" class="btn btn-primary"  data-toggle="modal" data-target="#exampleModalCenter"><spam class="glyphicon glyphicon-plus"></spam>Nueva Categoria</a>
-                  <!-- REGISTRO DE CLIENTE -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Registrar Subcategoria Nueva</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <label>Nombre de Subcategoria:</label>
-        <input type="text" class="form-control" id="nombrex" placeholder="Ingrese Nombre...">
-      </div>
-      <div class="modal-body">
-      <label>Nombre de categoria:</label>
-        <select name="cbx_estado" id="cbx_estado">
-				
-				<?php while($row = $lista_categoria->fetch_assoc()) { ?>
-					<option value="<?php echo $row['id']; ?>"><?php echo $row['nombre_categoria']; ?></option>
-				<?php } ?>
-	    </select>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button onclick="registrarcli();" type="button" class="btn btn-primary">Grabar</button>
-      </div>
-    </div>
-  </div>
-</div>
-  <!-- FIN REGISTRO DE CLIENTE -->
+                 
  
               </div>
+        
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
+                    <div class="row">
+                <div class="col-md-4">
+                  <fieldset style=" border: 1px groove #ddd !important;
+                     padding: 0 1.4em 1.4em 1.4em !important;
+                     margin: 0 0 1.5em 0 !important;
+                     -webkit-box-shadow:  0px 0px 0px 0px #000;
+                             box-shadow:  0px 0px 0px 0px #000;">
+                                     <legend style="font-size: 1.2em !important;
+                     font-weight: bold !important;
+                     text-align: left !important;">REGISTRO DE COMPRAS</legend>
+                    <form>
+                    <div class="row">
+                      
+                     
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <label>Producto:</label>
+                        <select class="form-control" id="producto">
+                          <option>Seleccione</option>
+                          <?php
+                          foreach ($lista as $value) {
+                            ?>
+                          <option value="<?php echo $value['id_produc']; ?>"><?php echo $value['nombre']; ?></option>
+                            <?php
+                          }
+                           ?>
+                        </select>
+                      </div>
+                      <div class="col-md-4">
+                        <label>Proveedor:</label>
+                         <select class="form-control" id="prove">
+                          <option>Seleccione</option>
+                          <?php
+                          foreach ($prove as $value) {
+                            ?>
+                          <option value="<?php echo $value['id_proveedores']; ?>"><?php echo $value['razon_social']; ?></option>
+                            <?php
+                          }
+                           ?>
+                        </select>
+                      </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <label>Cantidad:</label>
+                        <input type="text" id="codigo" name="codigo" hidden="true">
+                        <input type="text" class="form-control" id="cantidad" placeholder="Ingrese el codigo...">
+                      </div>
+                      <div class="col-md-8">
+                        <label>Precio:</label>
+                        <input type="text" class="form-control" id="precio" placeholder="Ingrese el Prodcuto...">
+                      </div>
+                    <div class="row">
+                     
+                      <div class="col-md-4">
+                        <label></label>
+                        <div id="reg">
+                        <button onclick="registrarpro();" type="button" class="btn btn-success form-control">Grabar</button>
+                        </div>
+                        <div id="edi" hidden="true">
+                        <button onclick="editarprod();" type="button" class="btn btn-danger form-control">Editar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  </fieldset>
+                  
+                </div>
+                <div class="col-md-8">
+                    <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>#</th>
-                    <th>Subcategoria</th>
-                    <th>Categoria</th>
-                    <th>Fecha de creacion</th>
-                    <th>Acciones</th>
+                    <th style="width:5%">#</th>
+                    <th style="width:30%">Producto</th>
+                    <th>Proveedor</th>
+                    <th style="width:10%">Cantidad</th>
+                    <th style="width:10%">Precio</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -292,11 +332,9 @@
                       ?>
                       <tr>
                     <td><?php echo $cont++; ?></td>
-                    <td><?php echo $value['nombre_sub_categoria']; ?></td>
-                    <td><?php echo $value['nombre_categoria']; ?></td>
-                    <td><?php echo $value['fecha_c']; ?></td>
-                    <td><a data-toggle="modal" data-target="#exampleModal" onclick="editarcli(<?php echo $value['id']; ?>)" class="btn btn-warning">Editar</a>
-                        <a data-toggle="modal" data-target=".bd-example-modal-sm" onclick="eliminarcli(<?php echo $value['id']; ?>)" class="btn btn-danger">Eliminar</a></td>
+                    <td><?php ?></td>
+                    <td><?php ?></td>
+                    <td><?php  ?></td> 
                   </tr>
                     <?php
                   }
@@ -304,13 +342,15 @@
                   
                   </tbody>              
                 </table>
+                </div>
+              </div>
               </div>
               <!-- edicion cliente -->
               <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Edicion Subcategorias</h5>
+                      <h5 class="modal-title" id="exampleModalLabel">Edicion Productos</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -319,7 +359,13 @@
                        <form>
                         <input type="text" class="form-control" placeholder="" hidden="true" id="ids">
                         <label>Nombre:</label>
-                        <input type="text" class="form-control" placeholder="" id="nombres">
+                        <input type="text" class="form-control" placeholder="" id="rucs">
+                        <label>Descripcion:</label>
+                        <input type="text" class="form-control" placeholder="" id="nomb">
+                        <label>Telefono:</label>
+                        <input type="text" class="form-control" placeholder="" id="tef">
+                        <label>Direccion:</label>
+                        <input type="text" class="form-control" placeholder="" id="dire">
                       </form>
                     </div>
                     <div class="modal-footer">
@@ -344,11 +390,11 @@
                     </div>
                     <div class="modal-body">
                       <input type="text" id="idsx" hidden="true">
-                      <a>Esta usted Seguro de Eliminar la  Subcategorias?</a>
+                      <a>Esta usted Seguro de Eliminar el Producto?</a>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                      <button onclick="eliminarclient();" type="button" class="btn btn-danger">eliminar</button>
+                      <button onclick="eliminarproduc();" type="button" class="btn btn-danger">eliminar</button>
                     </div>
     </div>
   </div>
@@ -387,7 +433,7 @@
 
 <!-- jQuery -->
 <script src="../../plugins/jquery/jquery.min.js"></script>
-<script src="../../js/categorias.js"></script>
+<script src="../../js/productos.js"></script>
 <!-- Bootstrap 4 -->
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- DataTables  & Plugins -->
