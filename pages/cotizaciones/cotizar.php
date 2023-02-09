@@ -14,7 +14,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Productos</title>
+  <title>AdminLTE 3 | Cotizaciones</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -216,7 +216,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Productos</h1>
+            <h1>Cotizaciones</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -238,83 +238,103 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Listado de Productos Registrados</h3>
-
-                 <!-- <a style="margin-left: 80px;" class="btn btn-primary"  data-toggle="modal" data-target="#exampleModalCenter"><spam class="glyphicon glyphicon-plus"></spam>Nuevo Producto</a> -->
-                  <!-- REGISTRO DE PRODUCTOS -->
-<!-- <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Registrar Productos Nuevo</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <label>Codigo:</label>
-        <input type="text" class="form-control" id="dirx" placeholder="Ingrese el codigo...">
-        <label>Nombre:</label>
-        <input type="text" class="form-control" id="rucx" placeholder="Ingrese el nombre...">
-        <label>Descripcion:</label>
-        <input type="text" class="form-control" id="socialx" placeholder="Ingrese la descripcion...">
-        <label>Cantidad:</label>
-        <input type="text" class="form-control" id="telx" placeholder="Ingrese Cantidad...">
-        <label>Categoria:</label>
-        <input type="text" class="form-control" id="dirx" placeholder="Ingrese la cateogira...">
-        <label>Tipo Calidad:</label>
-        <input type="text" class="form-control" id="dirx" placeholder="Ingrese la calidad...">
-        <label>Espesor:</label>
-        <input type="text" class="form-control" id="dirx" placeholder="Ingrese Espesor...">
-        <label>Alto:</label>
-        <input type="text" class="form-control" id="dirx" placeholder="Ingrese Largo...">
-        <label>Ancho:</label>
-        <input type="text" class="form-control" id="dirx" placeholder="Ingrese ancho...">
-        <label>Precio compra:</label>
-        <input type="text" class="form-control" id="dirx" placeholder="Ingrese precio compra...">
-        <label>Precio venta:</label>
-        <input type="text" class="form-control" id="dirx" placeholder="Ingrese precio venta...">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button onclick="registrarcli();" type="button" class="btn btn-primary">Grabar</button>
-      </div>
-    </div>
-  </div>
-</div> -->
-  <!-- FIN REGISTRO DE PRODUCTOS -->
+                <h3 class="card-title">Emitir Cotizaciones</h3>
  
               </div>
         
               <!-- /.card-header -->
               <div class="card-body">
-                    <div class="row">
-                <div class="col-md-4">
-                  <fieldset style=" border: 1px groove #ddd !important;
+             <form id="formcotizar" method="post" >
+                 <fieldset style=" border: 1px groove #ddd !important;
     padding: 0 1.4em 1.4em 1.4em !important;
     margin: 0 0 1.5em 0 !important;
     -webkit-box-shadow:  0px 0px 0px 0px #000;
             box-shadow:  0px 0px 0px 0px #000;">
                     <legend style="font-size: 1.2em !important;
     font-weight: bold !important;
-    text-align: left !important;">REGISTRO DE PRODUCTOS</legend>
-                    <form>
+    text-align: left !important;">Datos de Cliente</legend>
                     <div class="row">
-                      <div class="col-md-4">
-                        <label>Codigo:</label>
-                        <input type="text" id="codigo" name="codigo" hidden="true">
-                        <input type="text" class="form-control" id="dirx" placeholder="Ingrese el codigo...">
+                      <div class="col-md-2">
+                        <label>Ruc</label>
+                        <input class="form-control" id="ruc" name="ruc" type="text" placeholder="Ingrese Ruc...">
                       </div>
-                      <div class="col-md-8">
-                        <label>Producto:</label>
-                        <input type="text" class="form-control" id="producto" placeholder="Ingrese el Prodcuto...">
+                      <div class="col-md-1">
+                        <label></label>
+                        <a onclick="buscarcli();" class="btn btn-primary form-control">Buscar</a>
+                      </div>
+                      <div class="col-md-1">
+                        <label></label>
+                        <a onclick="emitir();" class="btn btn-success form-control">Emitir Cotizacion</a>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-3">
+                        <label>Cliente</label>
+                        <input type="text" class="form-control" id="empresa" name="empresa" placeholder="Ingrese Cliente..." readonly>
+                      </div>
+                      <div class="col-md-3">
+                        <label>Direccion</label>
+                        <input type="text" class="form-control" id="direc" name="direc" placeholder="Ingrese Direccion..." readonly>
+                      </div>
+                      <div class="col-md-2">
+                        <label>Telefono</label>
+                        <input type="text" class="form-control" id="telef" name="telef" placeholder="Ingrese Telefono..." readonly>
+                      </div>
+                      <div class="col-md-2">
+                        <label>Fecha</label>
+                        <input type="date" class="form-control" id="fecha" name="fecha" placeholder="Ingrese Fecha...">
+                      </div>
+                      <div class="col-md-2">
+                        <label>Total</label>
+                        <input type="text" class="form-control" id="totalf" name="totalf" placeholder="Ingrese Total...">
+                      </div>
+                    </div>
+                </fieldset>
+                <div class="row">
+                  <div class="col-md-4">
+                    <fieldset style=" border: 1px groove #ddd !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow:  0px 0px 0px 0px #000;
+            box-shadow:  0px 0px 0px 0px #000;">
+                    <legend style="font-size: 1.2em !important;
+    font-weight: bold !important;
+    text-align: left !important;">Datos de Productos</legend>
+       <div class="row">
+                      <div class="col-md-6">
+                        <label>Codigo Producto</label>
+                        <input class="form-control" id="codigo" type="text" placeholder="Ingrese Codigo...">
+                      </div>
+                      <div class="col-md-3">
+                        <label></label>
+                        <a onclick="buscarprod();" class="btn btn-primary form-control">Buscar</a>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-10">
+                        <label>Producto</label>
+                        <input type="text" class="form-control" id="producto" name="" placeholder="Ingrese Producto..." readonly>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-md-4">
-                        <label>Categoria:</label>
-                        <select class="form-control" id="categoria">
-                          <option>Seleccione</option>
+                        <label>Espesor</label>
+                        <input type="text" class="form-control" id="espesor" name="" placeholder="Ingrese Espesor..." readonly>
+                      </div>
+                      <div class="col-md-4">
+                        <label>Ancho</label>
+                        <input type="text" class="form-control" id="ancho" name="" placeholder="Ingrese Ancho..." readonly>
+                      </div>
+                      <div class="col-md-4">
+                        <label>Alto</label>
+                        <input type="text" class="form-control" id="alto" name="" placeholder="Ingrese Alto..." readonly>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <label>Categoria</label>
+                         <select class="form-control" id="categoria" readonly>
+                          <option>Seleccione Categoria</option>
                           <?php
                           foreach ($cate as $value) {
                             ?>
@@ -325,150 +345,56 @@
                         </select>
                       </div>
                       <div class="col-md-4">
-                        <label>Sub Categoria:</label>
-                         <select class="form-control" id="subcat">
-                          <option>Seleccione</option>
-                          <?php
-                          foreach ($scate as $value) {
-                            ?>
-                          <option value="<?php echo $value['id']; ?>"><?php echo $value['nombre_sub_categoria']; ?></option>
-                            <?php
-                          }
-                           ?>
-                        </select>
+                        <label>Precio</label>
+                        <input type="text" class="form-control" id="preciov" name="" placeholder="Ingrese Precio Venta..." readonly>
+                      </div>
+                       <div class="col-md-4">
+                        <label>Stock</label>
+                        <input type="text" class="form-control" id="stock" name="" placeholder="Ingrese Precio Venta..." readonly>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-md-4">
-                        <label>Espesor:</label>
-                        <input type="text" class="form-control" id="espesor" placeholder="Ingrese Espesor...">
+                        <label>Cantidad</label>
+                        <input type="text"  class="form-control" id="cantidad" name="" placeholder="Ingrese Cantidad...">
                       </div>
-                      <div class="col-md-4">
-                        <label>Alto:</label>
-                        <input type="text" class="form-control" id="alto" placeholder="Ingrese Largo...">
-                      </div>
-                      <div class="col-md-4">
-                        <label>Ancho:</label>
-                        <input type="text" class="form-control" id="ancho" placeholder="Ingrese ancho...">
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-4">
-                        <label>Precio compra:</label>
-                        <input type="text" class="form-control" id="precioc" placeholder="Ingrese precio compra...">
-                      </div>
-                      <div class="col-md-4">
-                        <label>Precio venta:</label>
-                        <input type="text" class="form-control" id="preciov" placeholder="Ingrese precio venta...">
-                      </div>
-                      <div class="col-md-4">
+                   <!--<div class="col-md-0">
+                        <label>Total</label>
+                        <input type="text" class="form-control" id="total" name="" placeholder="Ingrese Precio total..." readonly>
+                      </div> -->
+                      <div class="col-md-8">
                         <label></label>
-                        <div id="reg">
-                        <button onclick="registrarpro();" type="button" class="btn btn-success form-control">Grabar</button>
-                        </div>
-                        <div id="edi" hidden="true">
-                        <button onclick="editarprod();" type="button" class="btn btn-danger form-control">Editar</button>
-                        </div>
+                       <a onclick="agregar();" class="btn btn-danger form-control">Agregar</a>
                       </div>
                     </div>
-                  </form>
-                  </fieldset>
-                  
-                </div>
-                <div class="col-md-8">
-                    <table id="example1" class="table table-bordered table-striped">
+                </fieldset>
+                  </div>
+                  <div class="col-md-8">
+                     <table class="table table-dark">
                   <thead>
                   <tr>
-                    <th style="width:5%">#</th>
-                    <th style="width:11%">Codigo</th>
+                    <th>#</th>
+                    <th>Codigo</th>
                     <th>Nombre</th>
-                    <th style="width:10%">espesor</th>
-                    <th style="width:10%">Alto</th>
-                    <th style="width:10%">Ancho</th>
-                    <th style="width:17%">Acciones</th>
+                    <th>espesor</th>
+                    <th>Ancho</th>
+                    <th>Alto</th>
+                    <th>Categoria</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Total</th>
                   </tr>
                   </thead>
-                  <tbody>
-                    <?php
-                    $cont=0;
-                    foreach ($lista as $value) {
-
-                      ?>
-                      <tr>
-                    <td><?php echo $cont++; ?></td>
-                    <td><?php echo $value['codigo_producto']; ?></td>
-                    <td><?php echo $value['nombre']; ?></td>
-                    <td><?php echo $value['espesor']; ?></td> 
-                    <td><?php echo $value['alto']; ?></td>
-                    <td><?php echo $value['ancho']; ?></td>
-                    <td><a  onclick="editarpro(<?php echo $value['id_produc']; ?>)" class="btn btn-warning">Editar</a>
-                        <a data-toggle="modal" data-target=".bd-example-modal-sm" onclick="eliminarprod(<?php echo $value['id_produc']; ?>)" class="btn btn-danger">Eliminar</a></td>
-                  </tr>
-                    <?php
-                  }
-                     ?>
-                  
-                  </tbody>              
-                </table>
-                </div>
-              </div>
-              </div>
-              <!-- edicion cliente -->
-              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Edicion Productos</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                       <form>
-                        <input type="text" class="form-control" placeholder="" hidden="true" id="ids">
-                        <label>Nombre:</label>
-                        <input type="text" class="form-control" placeholder="" id="rucs">
-                        <label>Descripcion:</label>
-                        <input type="text" class="form-control" placeholder="" id="nomb">
-                        <label>Telefono:</label>
-                        <input type="text" class="form-control" placeholder="" id="tef">
-                        <label>Direccion:</label>
-                        <input type="text" class="form-control" placeholder="" id="dire">
-                      </form>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                      <button onclick="edicioncli();" type="button" class="btn btn-primary">Grabar</button>
-                    </div>
+                  <tbody id="detalles">
+                  </tbody>                    
+                  </table>
                   </div>
                 </div>
+            
+            </form>
+
               </div>
-              <!--FIN  edicion cliente -->
-
-              <!--  ELIMINAR cliente -->
-
-              <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-sm">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Alerta!!!</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <input type="text" id="idsx" hidden="true">
-                      <a>Esta usted Seguro de Eliminar el Producto?</a>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                      <button onclick="eliminarproduc();" type="button" class="btn btn-danger">eliminar</button>
-                    </div>
-    </div>
-  </div>
-</div>
-  <!--FIN  ELIMINAR cliente -->
-
+              </div>
 
 
 
@@ -501,7 +427,7 @@
 
 <!-- jQuery -->
 <script src="../../plugins/jquery/jquery.min.js"></script>
-<script src="../../js/productos.js"></script>
+<script src="../../js/cotizaciones.js"></script>
 <!-- Bootstrap 4 -->
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- DataTables  & Plugins -->
@@ -528,8 +454,7 @@
 <script>
   $(function () {
     $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      "responsive": true, "lengthChange": false, "autoWidth": false
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
       "paging": true,

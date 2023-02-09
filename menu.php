@@ -10,7 +10,7 @@
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
+       <!--      <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="./index.html" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
@@ -29,7 +29,7 @@
                   <p>Dashboard v3</p>
                 </a>
               </li>
-            </ul>
+            </ul> -->
           </li>
           <!-- acceso -->
           <li class="nav-item">
@@ -85,12 +85,12 @@
                   <p>Proveedores</p>
                 </a>
               </li>
-              <li class="nav-item">
+<!--               <li class="nav-item">
                 <a href="pages/productos/productos.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Productos</p>
                 </a>
-              </li>
+              </li> -->
               
             </ul>
           </li>
@@ -111,7 +111,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a href="pages/productos/productos.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Agregar Productos</p>
                 </a>
@@ -144,7 +144,7 @@
              
             </ul>
           </li>
-          <li class="nav-item">
+   <!--        <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
@@ -178,7 +178,7 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> -->
           
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -212,21 +212,85 @@
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                Kardex
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="pages/forms/general.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Kardex General</p>
+                </a>
+              </li>
+             
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                Stock
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="pages/forms/general.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Stock General</p>
+                </a>
+              </li>
+             
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Cotizaciones
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="pages/cotizaciones/cotizar.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Cotizar</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/forms/advanced.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Cotizaciones Emitidas</p>
+                </a>
+              </li>             
+            </ul>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
-                Guias de remocion
+                Guias de remicion
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
+               <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="pages/cotizaciones/cotizar.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Remitir</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/forms/advanced.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Guias Emitidas</p>
+                </a>
+              </li>             
+            </ul>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -236,6 +300,20 @@
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
+               <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="pages/cotizaciones/cotizar.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Facturar</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/forms/advanced.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Facturas Emitidas</p>
+                </a>
+              </li>             
+            </ul>
           </li>
           <li class="nav-item">
             <a href="cerrar.php" class="nav-link">
