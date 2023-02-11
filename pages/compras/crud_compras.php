@@ -25,6 +25,7 @@ if ($fun==1){
 		$row_array['idp']=$row['id_produc'];
 		$row_array['codigo']=$row['codigo_producto'];
 		$row_array['nombres']=$row['nombre'];
+		$row_array['precio_unidad']=$row['precio_venta'];
 		array_push($return_arr,$row_array);
     }
    echo json_encode($return_arr);
@@ -55,5 +56,17 @@ if ($fun==1){
 	} catch (Exception $e) {
         echo "2";		
 	}
+}else if ($fun==5) {
+	
+	$return_arr = array();
+	$buscar= mysqli_query($con,"SELECT * from  empp_tb_proveedores WHERE id_proveedores='$id'");
+    	while ($row = mysqli_fetch_array($buscar)) {
+		$row_array['id']=$row['id_proveedores'];
+		$row_array['razon_social']=$row['razon_social'];
+		$row_array['direccion']=$row['direccion'];
+		$row_array['ruc']=$row['ruc'];
+		array_push($return_arr,$row_array);
+    }
+   echo json_encode($return_arr);
 }
 ?>

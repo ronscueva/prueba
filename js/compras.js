@@ -1,9 +1,9 @@
 function buscarcli() {
-    var ruc = $("#ruc").val();
+    var id = $("#provee").val();
     $.ajax({
         type: "POST",
-        url: "crud_cotizaciones.php",
-        data: "funcion=" + 1 + "&id=" + ruc,
+        url: "crud_compras.php",
+        data: "funcion=" + 5 + "&id=" + id,
         dataType: "JSON",
         success: function (data) {
             var Toast = Swal.mixin({ toast: true, position: 'top-end', showConfirmButton: false, timer: 5000 });
@@ -11,10 +11,10 @@ function buscarcli() {
 
             //var datos=data[0]['doc'];
             if (data != '') {
-                $("#ruc").val(data[0]['doc']);
-                $("#empresa").val(data[0]['nombres']);
-                $("#direc").val(data[0]['dir']);
-                $("#telef").val(data[0]['telef']);
+                $("#id").val(data[0]['id']);
+                $("#razon_social").val(data[0]['razon_social']);
+                $("#direc").val(data[0]['direccion']);
+                $("#ruc").val(data[0]['ruc']);
             } else {
                 Toast.fire({ icon: 'error', title: 'No se encontro Cliente o No Existe, Verifique en el Modulo de Clientes!!!.' })
             }
@@ -35,7 +35,7 @@ function buscarprod() {
             //var datos=data[0]['doc'];
             if (data != '') {
                 //$("#dirx").val(data[0]['id']);
-                $("#codigo").val(data[0]['codigo']);
+                $("#preciouni").val(data[0]['precio_unidad']);
                 $("#producto").val(data[0]['nombres']);
             } else {
                 Toast.fire({ icon: 'error', title: 'No se encontro Cliente o No Existe, Verifique en el Modulo de Clientes!!!.' })
@@ -51,7 +51,7 @@ function agregar() {
     var total = 0;
     var subtotal = [];
    
-	var proveedor = $("#prove").val();
+	var proveedor = $("#razon_social").val();
 	var producto = $("#producto").val();
 	var cantidad = $("#cantidad").val();
 	var preciouni = $("#preciouni").val();
@@ -94,3 +94,55 @@ function agregar() {
 function eliminar(index) {
     $("#fila" + index).remove();
 }
+function registrarCompra(){
+    var id      =$("#dirx").val();
+    var producto=$("#producto").val();
+    var cat     =$("#categoria").val();
+    var scat    =$("#subcat").val();
+    var espesor =$("#espesor").val();
+    var alto    =$("#alto").val();
+    var ancho   =$("#ancho").val();
+    var compra  =$("#precioc").val();
+    var venta   =$("#preciov").val();
+
+        var Toast = Swal.mixin({toast: true,position: 'top-end',showConfirmButton: false,timer: 3000});
+        if (id==""){
+                    Toast.fire({icon: 'error',title: 'Debe de Ingresar el Codigo.'})
+                    return;
+        }else if (producto==""){
+                    Toast.fire({icon: 'error',title: 'Debe de Ingresar el Nombre del producto.'})
+                    return;
+        }else if (cat==""){
+                   Toast.fire({icon: 'error',title: 'Debe de Ingresar la Categoria'})
+                   return;
+        }else if (scat==""){
+                    Toast.fire({icon: 'error',title: 'Debe de Ingresar la Sub Categoria'})
+                    return;
+        }else if (venta==""){
+                    Toast.fire({icon: 'error',title: 'Debe de Ingresar el Precio Venra'})
+                    return;
+        }
+        $.ajax({
+            type:"post",
+            url:"crud_productos.php",
+            data:"funcion="+1+"&id="+id+"&producto="+producto+"&categoria="+cat+"&subcat="+scat+"&espesor="+espesor+"&alto="+alto+"&ancho="+ancho+"&precio="+venta+"&compra="+compra,
+            success:function(data){
+                console.log(data);
+                if (data==1){
+                    var Toast = Swal.mixin({toast: true,position: 'top-end',showConfirmButton: false,timer: 3000});
+                    Toast.fire({icon: 'success',title: 'Se Registro al Vendedor con Exito.'})
+                    location.reload();
+                }else
+                {
+                    $(document).Toasts('create', 
+                    {
+                    class: 'bg-maroon',
+                    title: 'ERROR !!!',
+                    subtitle: 'Alerta',
+                    body: 'Ocurrio un Error al Registrar al Vendedor!!!.'
+                    })
+                   // location.reload();
+                }
+            }
+        })
+    }

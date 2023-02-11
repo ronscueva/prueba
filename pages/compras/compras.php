@@ -251,26 +251,79 @@
 
 
                                 </div>
-
-                                <!-- /.card-header -->
-                                <div class="card-body">
-                                    <div class="row">
+                                <form>
+                                    <fieldset style=" border: 1px groove #ddd !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow:  0px 0px 0px 0px #000;
+            box-shadow:  0px 0px 0px 0px #000;">
+                                        <legend style="font-size: 1.2em !important;
+    font-weight: bold !important;
+    text-align: left !important;">Datos de Proveedor</legend>
+                                        <div class="row">
                                         <div class="col-md-4">
-                                            <fieldset style=" border: 1px groove #ddd !important;
+                                                            <label>Proveedor:</label>
+                                                            <select class="form-control" id="provee">
+                                                                <option>Seleccione</option>
+                                                                <?php
+                                                                  foreach ($prove as $value) {
+                                                                  ?>
+                                                                <option value="<?php echo $value['id_proveedores']; ?>">
+                                                                    <?php echo $value['razon_social']; ?></option>
+                                                                <?php
+                                                                  }
+                                                                   ?>
+                                                            </select>
+                                                        </div>
+                                            <div class="col-md-1">
+                                                <label></label>
+                                                <a onclick="buscarcli();"
+                                                    class="btn btn-primary form-control">Buscar</a>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <label></label>
+                                                <a onclick="registrarCompra();" class="btn btn-success form-control">Grabar</a>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label>Ruc</label>
+                                                <input type="text" class="form-control" id="ruc" name="ruc"
+                                                    placeholder="Ingrese Cliente..." readonly>
+                                                <input type="hidden" class="form-control" id="razon_social" name="razon_social">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label>Direccion</label>
+                                                <input type="text" class="form-control" id="direc" name="direc"
+                                                    placeholder="Ingrese Direccion..." readonly>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input type="hidden" class="form-control" id="id" name="id"
+                                                    placeholder="Ingrese Direccion..." readonly>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-4">
+
+                                                <fieldset style=" border: 1px groove #ddd !important;
                      padding: 0 1.4em 1.4em 1.4em !important;
                      margin: 0 0 1.5em 0 !important;
                      -webkit-box-shadow:  0px 0px 0px 0px #000;
                              box-shadow:  0px 0px 0px 0px #000;">
-                                                <legend style="font-size: 1.2em !important;
+                                                    <legend style="font-size: 1.2em !important;
                      font-weight: bold !important;
                      text-align: left !important;">REGISTRO DE COMPRAS</legend>
-                                                <form>
+
+
                                                     <div class="row">
 
 
                                                     </div>
                                                     <div class="row">
-                                                    <div class="col-md-4">
+                                                        <div class="col-md-4">
                                                             <label>Producto:</label>
                                                             <select class="form-control" id="codigo">
                                                                 <option>Seleccione</option>
@@ -284,33 +337,20 @@
                                                                    ?>
                                                             </select>
                                                         </div>
-                                                        <div class="col-md-3">
+                                                        <div class="col-md-4">
                                                             <label></label>
                                                             <a onclick="buscarprod();"
                                                                 class="btn btn-primary form-control">Buscar</a>
                                                         </div>
-                                                        <div class="row">
+                                                        <div class="col-md-8">
                                                             <div class="col-md-10">
                                                                 <label>Producto</label>
                                                                 <input type="text" class="form-control" id="producto"
                                                                     name="" placeholder="Ingrese Producto..." readonly>
                                                             </div>
                                                         </div>
+
                                                         
-                                                        <div class="col-md-4">
-                                                            <label>Proveedor:</label>
-                                                            <select class="form-control" id="prove">
-                                                                <option>Seleccione</option>
-                                                                <?php
-                                                                  foreach ($prove as $value) {
-                                                                    ?>
-                                                                <option value="<?php echo $value['id_proveedores']; ?>">
-                                                                    <?php echo $value['razon_social']; ?></option>
-                                                                <?php
-                                                                  }
-                                                                   ?>
-                                                            </select>
-                                                        </div>
                                                     </div>
 
                                                     <div class="col-md-4">
@@ -324,11 +364,7 @@
                                                         <input type="text" class="form-control" id="preciouni"
                                                             placeholder="Ingrese el precio unitario...">
                                                     </div>
-                                                    <div class="col-md-8">
-                                                        <label>Precio Total:</label>
-                                                        <input type="text" class="form-control" id="preciototal"
-                                                            placeholder="Ingrese el Prodcuto...">
-                                                    </div>
+                                                  
                                                     <div class="row">
 
                                                         <div class="col-md-8">
@@ -338,105 +374,105 @@
                                                         </div>
                                                     </div>
 
-                                            </fieldset>
+                                                </fieldset>
 
+                                            </div>
+                                            <div class="col-md-8">
+                                                <table class="table table-dark">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Producto</th>
+                                                            <th>Proveedor</th>
+                                                            <th>Cantidad</th>
+                                                            <th>Precio Unidad</th>
+                                                            <th>Precio Total</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="detalles">
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
-                                        <div class="col-md-8">
-                                            <table class="table table-dark">
-                                                <thead>
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>Producto</th>
-                                                        <th>Proveedor</th>
-                                                        <th>Cantidad</th>
-                                                        <th>Precio Unidad</th>
-                                                        <th>Precio Total</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="detalles">
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    </form>
-                                </div>
+                                </form>
                             </div>
-                            <!-- edicion cliente -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Edicion Productos</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form>
-                                                <input type="text" class="form-control" placeholder="" hidden="true"
-                                                    id="ids">
-                                                <label>Nombre:</label>
-                                                <input type="text" class="form-control" placeholder="" id="rucs">
-                                                <label>Descripcion:</label>
-                                                <input type="text" class="form-control" placeholder="" id="nomb">
-                                                <label>Telefono:</label>
-                                                <input type="text" class="form-control" placeholder="" id="tef">
-                                                <label>Direccion:</label>
-                                                <input type="text" class="form-control" placeholder="" id="dire">
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Cerrar</button>
-                                            <button onclick="edicioncli();" type="button"
-                                                class="btn btn-primary">Grabar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--FIN  edicion cliente -->
-
-                            <!--  ELIMINAR cliente -->
-
-                            <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog"
-                                aria-labelledby="mySmallModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-sm">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Alerta!!!</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <input type="text" id="idsx" hidden="true">
-                                            <a>Esta usted Seguro de Eliminar el Producto?</a>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Cerrar</button>
-                                            <button onclick="eliminarproduc();" type="button"
-                                                class="btn btn-danger">eliminar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--FIN  ELIMINAR cliente -->
-
-
-
-
                         </div>
-                        <!-- /.card -->
+                        <!-- edicion cliente -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Edicion Productos</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <input type="text" class="form-control" placeholder="" hidden="true"
+                                                id="ids">
+                                            <label>Nombre:</label>
+                                            <input type="text" class="form-control" placeholder="" id="rucs">
+                                            <label>Descripcion:</label>
+                                            <input type="text" class="form-control" placeholder="" id="nomb">
+                                            <label>Telefono:</label>
+                                            <input type="text" class="form-control" placeholder="" id="tef">
+                                            <label>Direccion:</label>
+                                            <input type="text" class="form-control" placeholder="" id="dire">
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Cerrar</button>
+                                        <button onclick="edicioncli();" type="button"
+                                            class="btn btn-primary">Grabar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--FIN  edicion cliente -->
+
+                        <!--  ELIMINAR cliente -->
+
+                        <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog"
+                            aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Alerta!!!</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <input type="text" id="idsx" hidden="true">
+                                        <a>Esta usted Seguro de Eliminar el Producto?</a>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Cerrar</button>
+                                        <button onclick="eliminarproduc();" type="button"
+                                            class="btn btn-danger">eliminar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--FIN  ELIMINAR cliente -->
+
+
+
+
                     </div>
-                    <!-- /.col -->
+                    <!-- /.card -->
                 </div>
-                <!-- /.row -->
+                <!-- /.col -->
         </div>
-        <!-- /.container-fluid -->
-        </section>
-        <!-- /.content -->
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
     <footer class="main-footer">
