@@ -1,4 +1,9 @@
-
+function generarfacf(id,tipo){
+	window.open("../facturacion/impresion.php?id=" + id+"&tipo="+tipo, "ventana1", "width=600,height=450,scrollbars=NO")
+}
+function generaropf(id){
+	window.open("../ordenpedido/impresiones.php?id=" + id, "ventana1", "width=600,height=450,scrollbars=NO")
+}
 function imprimircot(id) {
 
 	window.open("impresiones.php?id=" + id, "ventana1", "width=600,height=450,scrollbars=NO")
@@ -196,7 +201,7 @@ function agregar()
 		$("#fila" + index).remove();
 	}
 
-	function generarfac(id) {
+	function generarfac(id,tipo) {
 		$.ajax({
 			type: "POST",
 			url: "crud_cotizaciones.php",
@@ -208,7 +213,7 @@ function agregar()
 
 				if (data == 1) {
 					Toast.fire({ icon: 'success', title: 'Se genero con Exito la Facturacion!!!.' })
-					window.open("../facturacion/impresion.php?id=" + id, "ventana1", "width=600,height=450,scrollbars=NO")
+					window.open("../facturacion/impresion.php?id=" + id+"&tipo="+tipo, "ventana1", "width=600,height=450,scrollbars=NO")
 					location.reload();
 				} else {
 					Toast.fire({ icon: 'error', title: 'No se genero con Exito la Facturacion!!!.' })

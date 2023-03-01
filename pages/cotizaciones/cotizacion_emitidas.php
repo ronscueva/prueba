@@ -264,8 +264,11 @@ inner join empp_tb_cliente b on b.id_reg=a.id_cliente");
                       if ($value['estado']=="2") {
                         $color="#fdb0b0";
 
-                      }else if($value['estado']=="3"){
+                      }else if($value['estado']=="3" ){
+                      $color="#b1ccfa";
+                      }else if ( $value['estado']=="4") {
                         $color="#d4f8c0";
+                        
                       }else{
                         $color="";
                       }
@@ -280,15 +283,20 @@ inner join empp_tb_cliente b on b.id_reg=a.id_cliente");
                     <?php
                     if ($value['estado']=="2" || $value['estado']=="3") {
                     ?>
-                    <td></td>
+                     <td>
+                      <a onclick="imprimircot(<?php echo $value['id_reg'] ?>)" class="btn btn-default" title="Imprimir Cotización">
+                        <img style="width: 20px" src="impresora.png"></a>
+                      <a onclick="generaropf(<?php echo $value['id_reg'] ?>);" class="btn btn-default" title="Generar Orden de Pedido"><img style="width: 20px" src="orden.png"></a>
+                      <a onclick="generarfacf(<?php echo $value['id_reg'] ?>,'1');" class="btn btn-default" title="Generar Factura"><img style="width: 20px" src="factura.png"></a>
+                      <a title="Anular Cotización" class="btn btn-default" data-toggle="modal" data-target=".bd-example-modal-sm" onclick="eliminarcot(<?php echo $value['id_reg'] ?>);"><img style="width: 20px" src="basura.png"></a></td>
                     <?php 
                      }else{
                     ?>
                     <td>
                       <a onclick="imprimircot(<?php echo $value['id_reg'] ?>)" class="btn btn-default" title="Imprimir Cotización">
                         <img style="width: 20px" src="impresora.png"></a>
-                      <a onclick="generarfac(<?php echo $value['id_reg'] ?>);" class="btn btn-default" title="Generar Factura"><img style="width: 20px" src="factura.png"></a>
                       <a onclick="generarop(<?php echo $value['id_reg'] ?>);" class="btn btn-default" title="Generar Orden de Pedido"><img style="width: 20px" src="orden.png"></a>
+                      <a onclick="generarfac(<?php echo $value['id_reg'] ?>,'1');" class="btn btn-default" title="Generar Factura"><img style="width: 20px" src="factura.png"></a>
                       <a title="Anular Cotización" class="btn btn-default" data-toggle="modal" data-target=".bd-example-modal-sm" onclick="eliminarcot(<?php echo $value['id_reg'] ?>);"><img style="width: 20px" src="basura.png"></a></td>
                 
                     <?php

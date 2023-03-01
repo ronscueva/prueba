@@ -3,8 +3,15 @@ require('pdf/fpdf.php');
 //require_once ("../../config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
 //require_once ("../../config/conexion.php");//Contiene funcion que conecta a la base de datos
 $id=$_REQUEST['id'];
+$tipo=isset($_REQUEST['tipo']);
 $con=mysqli_connect("a2plcpnl0863.prod.iad2.secureserver.net","bd_sistema","%Sistemas0rb1n3t@","siscontrol");
-$consul="SELECT a.id_reg,a.n_documento,b.nombres,b.direccion,a.descuento,a.precio_texto,a.fecha_reg,a.estado,b.n_doc,d.nombre,c.cantidad,c.precio,c.total FROM empp_tb_factura_cab a inner join empp_tb_cliente b on b.id_reg=a.id_cliente inner join empp_tb_factura_det c on c.id_regcab=a.id_reg inner join empp_tb_productos d on d.id_produc=c.id_producto WHERE a.id_coti='$id'";
+if ($tipo==1) {
+$consul="SELECT a.id_reg,a.n_documento,b.nombres,b.direccion,a.descuento,a.precio_texto,a.fecha_reg,a.estado,b.n_doc,d.nombre,c.cantidad,c.precio,c.total FROM empp_tb_factura_cab a inner join empp_tb_cliente b on b.id_reg=a.id_cliente inner join empp_tb_factura_det c on c.id_regcab=a.id_reg inner join empp_tb_productos d on d.id_produc=c.id_producto 
+WHERE a.id_coti='$id'";
+}else{
+    $consul="SELECT a.id_reg,a.n_documento,b.nombres,b.direccion,a.descuento,a.precio_texto,a.fecha_reg,a.estado,b.n_doc,d.nombre,c.cantidad,c.precio,c.total FROM empp_tb_factura_cab a inner join empp_tb_cliente b on b.id_reg=a.id_cliente inner join empp_tb_factura_det c on c.id_regcab=a.id_reg inner join empp_tb_productos d on d.id_produc=c.id_producto 
+WHERE a.id_reg='$id'";
+}
 //echo $consul;die();
 $lista= mysqli_query($con,$consul);
 $listado=mysqli_fetch_array($lista);

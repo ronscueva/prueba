@@ -349,7 +349,7 @@ $dolar=$tipoCambioSunat->compra;
                       <div class="col-md-1">
                         <label>Descuento</label>
                         <input type="text" hidden="true" class="form-control" id="telef" name="telef" placeholder="Ingrese Telefono..." readonly>
-                        <input class="form-control" type="text" name="descuento" id="descuento" placeholder="Ingrese Descuento...">
+                        <input class="form-control" type="text" name="descuento" id="descuento" value="0" placeholder="Ingrese Descuento...">
                       </div>
                       
                       <div class="col-md-1">
