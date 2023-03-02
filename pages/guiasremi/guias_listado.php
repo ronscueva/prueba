@@ -270,7 +270,7 @@ left JOIN empp_tb_factura_cab b on b.id_reg=a.id_factura");
                     <td><?php echo $value['peso']; ?></td>
                     <td><?php echo $value['fec_emision']; ?></td>
                     <td>
-                      <a onclick="imprimircot(<?php echo $value['id_reg'] ?>)" class="btn btn-default" title="Imprimir Guia">
+                      <a onclick="printguias(<?php echo $value['id_reg'] ?>)" class="btn btn-default" title="Imprimir Guia">
                         <img style="width: 20px" src="../../images/impresora.png"></a></td>
                       </tr>
                       <?php
@@ -338,7 +338,7 @@ left JOIN empp_tb_factura_cab b on b.id_reg=a.id_factura");
 
 <!-- jQuery -->
 <script src="../../plugins/jquery/jquery.min.js"></script>
-<script src="../../js/cotizaciones.js"></script>
+<script src="../../js/guias.js"></script>
 <!-- Bootstrap 4 -->
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- DataTables  & Plugins -->

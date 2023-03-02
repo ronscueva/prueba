@@ -1,3 +1,8 @@
+function printguias(id){
+	window.open("impresion.php?id=" + id, "ventana1", "width=600,height=450,scrollbars=NO")
+}
+
+
 function buscarfac(){
 	var fac=$("#factura").val();
 	$.ajax({
