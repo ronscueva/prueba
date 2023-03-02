@@ -4,6 +4,8 @@
 $fun   =$_POST['funcion'];
 $id    =$_POST['id'];
 $nombre   =$_POST['nombre'];
+$apellido   =$_POST['apellido'];
+$dni   =$_POST['dni'];
 $usuario=$_POST['usuario'];
 $pass   =$_POST['pass'];
 $level =$_POST['level'];
@@ -12,13 +14,23 @@ $password = sha1($pass);
 if ($fun==1){
 	//INSERTAR
 	//echo "$password ";
-	$insert="INSERT INTO empp_tb_users (name,username,password,user_level,image,status,last_login) VALUES('$nombre','$usuario','$password','$level','no_image.jpg','1','2023-01-30 15:02:45')";
+	$insert="INSERT INTO empp_tb_users (name,apellido,dni,username,password,user_level,image,status,last_login) VALUES('$nombre','$apellido','$dni','$usuario','$password','$level','no_image.jpg','1',NOW())";
 	$ejec=mysqli_query($con,$insert);
 	 if (mysqli_affected_rows($con)!=0) {
 	 echo "$insert";
 	 }else{
 	 	echo "2";
 	 }
+	 if ($level == 2) {
+		$insert="INSERT INTO empp_tb_vendedor (dni,nombre_vendedor,apellido_vendedor,telefono,direccion,fecha_registro,estado) VALUES('$dni','$nombre','$apellido','','',NOW(),'1')";
+		$ejec=mysqli_query($con,$insert);
+
+		$insert="INSERT INTO empp_tb_vendedor (dni,nombre_vendedor,apellido_vendedor,telefono,direccion,fecha_registro,estado) VALUES('$dni','$nombre','$apellido','','',NOW(),'1')";
+		$ejec=mysqli_query($con,$insert);
+
+		}else{
+			echo "2";
+		}
 
 }else if ($fun==2) {
 	// buscar

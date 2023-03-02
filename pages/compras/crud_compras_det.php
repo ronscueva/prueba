@@ -27,19 +27,24 @@ while ($cont < $contador) {
 	$precigrid=$preciunigrid[$cont];
 	$togrid=$totalgrid[$cont];
 	$prgrid=$productogrid[$cont];
-
+// INSERT CABEBECERA
 $insertdet="INSERT INTO empp_tb_detalle_compra(id_compra,id_producto,precio,cantidad,total_subproducto,fecha)
                                         VALUES('$idcompra','$prgrid',$precigrid,$cantgrid,$togrid,NOW())";									
 $ejecdet=mysqli_query($con,$insertdet);
-// UPDATE SELECT
+// UPDATE SELECT PARA EL ULTIMO VALOR DE CABECERA
 
 $kar=mysqli_query($con,"SELECT id_produc, stock , fecha_mof from empp_tb_inventario where id_produc = $prgrid ");
 $idss= mysqli_fetch_array($kar);
 $stock=$idss['stock'];
 $stock= $stock + $cantgrid;		
-// UPDATE 
+// UPDATE A LA TABLA INVENTARIO
 $act="UPDATE empp_tb_inventario SET stock='$stock'  where id_produc='$prgrid' ";
 $idses= mysqli_query($con,$act);
+
+// INSERT A LA TABLA KARDEX
+$insertkardex="INSERT INTO empp_tb_kardex(id_almacen,id_producto,fecha,cantidad,tipo,saldo)
+                                        VALUES('1','$prgrid',NOW(),$cantgrid,'Ingreso', $stock)";									
+$ejecdet=mysqli_query($con,$insertkardex);
 
 
 $cont=$cont+1;

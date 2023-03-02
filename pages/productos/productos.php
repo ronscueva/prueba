@@ -267,7 +267,7 @@
         <label>Espesor:</label>
         <input type="text" class="form-control" id="dirx" placeholder="Ingrese Espesor...">
         <label>Alto:</label>
-        <input type="text" class="form-control" id="dirx" placeholder="Ingrese Largo...">
+        <input type="text" class="form-control" id="dirx" placeholder="Ingrese alto...">
         <label>Ancho:</label>
         <input type="text" class="form-control" id="dirx" placeholder="Ingrese ancho...">
         <label>Precio compra:</label>
@@ -344,7 +344,7 @@
                         <input type="text" class="form-control" id="espesor" placeholder="Ingrese Espesor...">
                       </div>
                       <div class="col-md-4">
-                        <label>Alto:</label>
+                        <label>Largo:</label>
                         <input type="text" class="form-control" id="alto" placeholder="Ingrese Largo...">
                       </div>
                       <div class="col-md-4">
@@ -383,7 +383,7 @@
                     <th style="width:11%">Codigo</th>
                     <th>Nombre</th>
                     <th style="width:10%">espesor</th>
-                    <th style="width:10%">Alto</th>
+                    <th style="width:10%">Largo</th>
                     <th style="width:10%">Ancho</th>
                     <th style="width:17%">Acciones</th>
                   </tr>

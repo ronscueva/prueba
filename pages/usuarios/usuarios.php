@@ -265,9 +265,15 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <label>Nombre:</label>
+                                                    <label>DNI:</label>
+                                                    <input type="text" class="form-control" id="dnix"
+                                                        placeholder="Ingrese DNI" required>
+                                                    <label>Nombres:</label>
                                                     <input type="text" class="form-control" id="nombrex"
                                                         placeholder="Nombre completo" required>
+                                                    <label>Apellidos:</label>
+                                                    <input type="text" class="form-control" id="apellidox"
+                                                        placeholder="Apellidos completo" required>
                                                     <label>Usuario:</label>
                                                     <input type="text" class="form-control" id="usuariox"
                                                         placeholder="Nombre de usuario">

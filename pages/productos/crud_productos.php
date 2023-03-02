@@ -17,7 +17,16 @@ if ($fun==1){
 	$insert="INSERT INTO empp_tb_productos (nombre,descripcion,cantidad,id_sub_categoria,id_categoria,codigo_producto,tipo_calidad,espesor,precio_compra,precio_venta,alto,ancho,estado) VALUES('$producto','','0','$subcat','$categoria','$id','','$espesor','$compra','$precio','$alto','$ancho','1')";
 	//echo $insert;die();
 	$ejec=mysqli_query($con,$insert);
+	
+
 	 if (mysqli_affected_rows($con)!=0) {
+		$cot=mysqli_query($con,"SELECT MAX(id_produc) as id  from empp_tb_productos");
+	$ids= mysqli_fetch_array($cot);
+	$idcreado=$ids['id'];
+
+	$insertinventario="INSERT INTO empp_tb_inventario (id_produc, stock, fecha_mof) VALUES('$idcreado','0',NOW())";
+	//echo $insert;die();
+	$ejectar=mysqli_query($con,$insertinventario);
 	 echo "1";
 	 }else{
 	 	echo "2";
