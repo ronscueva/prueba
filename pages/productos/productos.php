@@ -325,16 +325,12 @@
                         </select>
                       </div>
                       <div class="col-md-4">
-                        <label>Sub Categoria:</label>
+                        <label>Tipo Calidad:</label>
                          <select class="form-control" id="subcat">
                           <option>Seleccione</option>
-                          <?php
-                          foreach ($scate as $value) {
-                            ?>
-                          <option value="<?php echo $value['id']; ?>"><?php echo $value['nombre_sub_categoria']; ?></option>
-                            <?php
-                          }
-                           ?>
+                          <option value="1">Natural</option>
+                          <option value="2">Prepintado</option>
+                           
                         </select>
                       </div>
                     </div>

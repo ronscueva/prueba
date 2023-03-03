@@ -11,10 +11,19 @@ $alto     =$_POST['alto'];
 $ancho    =$_POST['ancho'];
 $precio   =$_POST['precio'];
 $compra   =$_POST['compra'];
-//echo "llegue";
+
 if ($fun==1){
-	//INSERTAR
-	$insert="INSERT INTO empp_tb_productos (nombre,descripcion,cantidad,id_sub_categoria,id_categoria,codigo_producto,tipo_calidad,espesor,precio_compra,precio_venta,alto,ancho,estado) VALUES('$producto','','0','$subcat','$categoria','$id','','$espesor','$compra','$precio','$alto','$ancho','1')";
+	
+if ($subcat == 1) {
+	$constante = 7.86;
+}else{
+	$constante = 7.9;
+}
+$peso = $espesor * $ancho * $alto * $constante ;
+//echo $peso;die();
+
+	
+	$insert="INSERT INTO empp_tb_productos (nombre,descripcion,cantidad,id_sub_categoria,id_categoria,codigo_producto,tipo_calidad,espesor,precio_compra,precio_venta,alto,ancho,peso,estado) VALUES('$producto','','0','1','$categoria','$id','$subcat','$espesor','$compra','$precio','$alto','$ancho','$peso','1')";
 	//echo $insert;die();
 	$ejec=mysqli_query($con,$insert);
 	

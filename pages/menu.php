@@ -42,7 +42,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link ">
+                <a href="../index.html" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Administrar grupos</p>
                 </a>
@@ -104,12 +104,7 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="./index.html" class="nav-link ">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Administrar producto</p>
-                </a>
-              </li>
+              
               <li class="nav-item">
                 <a href="../productos/productos.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>

@@ -58,7 +58,7 @@ if ($fun==1){
 	// buscar
 	//echo "23";
 	$return_arr = array();
-	$buscar= mysqli_query($con,"SELECT id_produc,codigo_producto,id_categoria,id_sub_categoria,nombre,estado,espesor,largo,ancho,precio_compra,precio_venta FROM empp_tb_productos WHERE estado='1' and id_produc='$id'");
+	$buscar= mysqli_query($con,"SELECT id_produc,codigo_producto,id_categoria,id_sub_categoria,nombre,estado,espesor,alto,ancho,precio_compra,precio_venta FROM empp_tb_productos WHERE estado='1' and id_produc='$id'");
     	while ($row = mysqli_fetch_array($buscar)) {
 		$row_array['idp']=$row['id_produc'];
 		$row_array['codigo']=$row['codigo_producto'];

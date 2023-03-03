@@ -91,12 +91,12 @@
                   <p>Proveedores</p>
                 </a>
               </li>
-<!--               <li class="nav-item">
+             <li class="nav-item">
                 <a href="pages/productos/productos.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Productos</p>
                 </a>
-              </li> -->
+              </li> 
               
             </ul>
           </li>
@@ -110,12 +110,7 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="./index.html" class="nav-link ">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Administrar producto</p>
-                </a>
-              </li>
+              
               <li class="nav-item">
                 <a href="pages/productos/productos.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
