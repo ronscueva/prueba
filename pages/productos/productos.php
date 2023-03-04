@@ -8,6 +8,8 @@
     $cate= mysqli_query($con,"SELECT * FROM empp_tb_categoria");
     $scate= mysqli_query($con,"SELECT * FROM empp_tb_sub_categoria");
 
+    $tipo= mysqli_query($con,"SELECT * FROM empp_tb_tipo_producto");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -328,8 +330,13 @@
                         <label>Tipo Calidad:</label>
                          <select class="form-control" id="subcat">
                           <option>Seleccione</option>
-                          <option value="1">Natural</option>
-                          <option value="2">Prepintado</option>
+                          <?php
+                          foreach ($tipo as $value){
+                            ?>
+                          <option value="<?php echo $value['constante']; ?>"><?php echo $value['tipo_producto']  ?></option>
+                            <?php
+                          }
+                           ?>
                            
                         </select>
                       </div>
@@ -381,6 +388,7 @@
                     <th style="width:10%">espesor</th>
                     <th style="width:10%">Largo</th>
                     <th style="width:10%">Ancho</th>
+                    <th style="width:10%">Peso</th>
                     <th style="width:17%">Acciones</th>
                   </tr>
                   </thead>
@@ -397,6 +405,7 @@
                     <td><?php echo $value['espesor']; ?></td> 
                     <td><?php echo $value['alto']; ?></td>
                     <td><?php echo $value['ancho']; ?></td>
+                    <td><?php echo $value['peso']; ?></td>
                     <td><a  onclick="editarpro(<?php echo $value['id_produc']; ?>)" class="btn btn-warning">Editar</a>
                         <a data-toggle="modal" data-target=".bd-example-modal-sm" onclick="eliminarprod(<?php echo $value['id_produc']; ?>)" class="btn btn-danger">Eliminar</a></td>
                   </tr>

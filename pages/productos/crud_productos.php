@@ -5,7 +5,7 @@ $fun      =$_POST['funcion'];
 $id       =$_POST['id'];
 $producto =$_POST['producto'];
 $categoria=$_POST['categoria'];
-$subcat   =$_POST['subcat'];
+$constante=$_POST['subcat'];
 $espesor  =$_POST['espesor'];
 $alto     =$_POST['alto'];
 $ancho    =$_POST['ancho'];
@@ -14,16 +14,12 @@ $compra   =$_POST['compra'];
 
 if ($fun==1){
 	
-if ($subcat == 1) {
-	$constante = 7.86;
-}else{
-	$constante = 7.9;
-}
+
 $peso = $espesor * $ancho * $alto * $constante ;
 //echo $peso;die();
 
 	
-	$insert="INSERT INTO empp_tb_productos (nombre,descripcion,cantidad,id_sub_categoria,id_categoria,codigo_producto,tipo_calidad,espesor,precio_compra,precio_venta,alto,ancho,peso,estado) VALUES('$producto','','0','1','$categoria','$id','$subcat','$espesor','$compra','$precio','$alto','$ancho','$peso','1')";
+	$insert="INSERT INTO empp_tb_productos (nombre,descripcion,cantidad,id_sub_categoria,id_categoria,codigo_producto,tipo_producto,espesor,precio_compra,precio_venta,alto,ancho,peso,estado) VALUES('$producto','','0','1','$categoria','$id','$constante','$espesor','$compra','$precio','$alto','$ancho','$peso','1')";
 	//echo $insert;die();
 	$ejec=mysqli_query($con,$insert);
 	
@@ -45,7 +41,7 @@ $peso = $espesor * $ancho * $alto * $constante ;
 	// buscar
 	//echo "23";
 	$return_arr = array();
-	$buscar= mysqli_query($con,"SELECT id_produc,codigo_producto,id_categoria,id_sub_categoria,nombre,estado,espesor,alto,ancho,precio_compra,precio_venta FROM empp_tb_productos WHERE estado='1' and id_produc='$id'");
+	$buscar= mysqli_query($con,"SELECT id_produc,codigo_producto,id_categoria,id_sub_categoria,nombre,estado,espesor,alto,ancho,precio_compra,precio_venta,peso FROM empp_tb_productos WHERE estado='1' and id_produc='$id'");
     	while ($row = mysqli_fetch_array($buscar)) {
 		$row_array['idp']=$row['id_produc'];
 		$row_array['id']=$row['codigo_producto'];
@@ -63,8 +59,9 @@ $peso = $espesor * $ancho * $alto * $constante ;
    echo json_encode($return_arr);
 }else if ($fun==3) {
 	// EDITAR
+	$peso = $espesor * $ancho * $alto * $constante ;
 	try {
-	$ed="UPDATE empp_tb_productos SET codigo_producto='$id',nombre='$producto',id_categoria='$categoria',id_sub_categoria='$subcat',espesor='$espesor',alto='$alto',ancho='$ancho',precio_venta='$precio',precio_compra='$compra' WHERE id_produc='$id'";
+	$ed="UPDATE empp_tb_productos SET codigo_producto='$id',nombre='$producto',id_categoria='$categoria',id_sub_categoria='1',espesor='$espesor',alto='$alto',ancho='$ancho',precio_venta='$precio',precio_compra='$compra' , peso ='$peso' WHERE id_produc='$id'";
 	$exec= mysqli_query($con,$ed);
 	//echo $exec;
 	 if (mysqli_affected_rows($con)!=0) {
@@ -88,5 +85,15 @@ $peso = $espesor * $ancho * $alto * $constante ;
 	} catch (Exception $e) {
         echo "2";		
 	}
+}
+else if ($fun==5) {
+	$tipo_producto =$_POST['tipo_producto'];
+	$constante =$_POST['constante'];	
+
+
+	$insert="INSERT INTO empp_tb_tipo_producto (tipo_producto,constante,fecha,estado) VALUES('$tipo_producto','$constante',NOW(),'1')";
+	echo $insert;die();
+	$ejec=mysqli_query($con,$insert);
+	
 }
 ?>

@@ -147,4 +147,39 @@ function editarpro(id){
             }
         })
     }
+    function registrartipopro() {
+        var tipo_producto = $("#tipo_productox").val();
+        var constante = $("#constantex").val();
+    
+        //alert(ruc);
+        var Toast = Swal.mixin({ toast: true, position: 'top-end', showConfirmButton: false, timer: 3000 });
+        if (tipo_producto == "") {
+            Toast.fire({ icon: 'error', title: 'Debe de Ingresar el Nombre.' })
+            return;
+        } else if (constante == "") {
+            Toast.fire({ icon: 'error', title: 'Debe de Ingresar la constante.' })
+            return;
+        } 
+        $.ajax({
+            type: "post",
+            url: "crud_tipo_producto.php",
+            data: "funcion=" + 1 + "&id=" + 0 + "&tipo_producto=" + tipo_producto +  "&constante=" + constante ,
+            success: function (data) {
+                console.log(data);
+                if (data == 1) {
+                    var Toast = Swal.mixin({ toast: true, position: 'top-end', showConfirmButton: false, timer: 3000 });
+                    Toast.fire({ icon: 'success', title: 'Se Registro al Usuario con Exito.' })
+                    location.reload();
+                } else {
+                    $(document).Toasts('create', {
+                        class: 'bg-maroon',
+                        title: 'ERROR !!!',
+                        subtitle: 'Alerta',
+                        body: 'Ocurrio un Error al Registrar al Ususario!!!.'
+                    })
+                    location.reload();
+                }
+            }
+        })
+    }
     
