@@ -14,12 +14,15 @@ $compra   =$_POST['compra'];
 
 if ($fun==1){
 	
-
-$peso = $espesor * $ancho * $alto * $constante ;
+if ($categoria==1) {
+$peso = ($espesor * $ancho * $alto * $constante)/1000;	
+}else{
+$peso = ($espesor * $ancho * $alto * $constante)/1000000;	
+}
 //echo $peso;die();
 
 	
-	$insert="INSERT INTO empp_tb_productos (nombre,descripcion,cantidad,id_sub_categoria,id_categoria,codigo_producto,tipo_producto,espesor,precio_compra,precio_venta,alto,ancho,peso,estado) VALUES('$producto','','0','1','$categoria','$id','$constante','$espesor','$compra','$precio','$alto','$ancho','$peso','1')";
+	$insert="INSERT INTO empp_tb_productos (nombre,descripcion,cantidad,id_sub_categoria,id_categoria,codigo_producto,tipo_producto,espesor,precio_compra,precio_venta,alto,ancho,peso,estado) VALUES('$producto','','0','1','$categoria','$id','$constante','$espesor','$compra','$precio','$alto','$ancho','".number_format($peso, 4, '.', ' ')."','1')";
 	//echo $insert;die();
 	$ejec=mysqli_query($con,$insert);
 	

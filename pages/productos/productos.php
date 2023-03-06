@@ -357,6 +357,20 @@
                     </div>
                     <div class="row">
                       <div class="col-md-4">
+                        <br>
+                        <a onclick="calculopeso();" class="btn btn-danger">calcular Peso</a>
+                      </div>
+                      <div class="col-md-4">
+                        <br>
+                        <a onclick="calculoprecio();" class="btn btn-danger">calcular Precio</a>
+                      </div>
+                      <div class="col-md-4">
+                        <label>Peso:</label>
+                        <input type="text" class="form-control" id="peso" placeholder="Ingrese Espesor...">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4">
                         <label>Precio compra:</label>
                         <input type="text" class="form-control" id="precioc" placeholder="Ingrese precio compra...">
                       </div>

@@ -1,3 +1,23 @@
+function calculoprecio(){
+    var peso =$("#peso").val();
+    
+}
+function calculopeso(){
+var cat=$("#categoria").val();
+var espesor=$("#espesor").val();
+var alto=$("#alto").val();
+var ancho=$("#ancho").val();
+var constante=$("#subcat").val();
+var peso="";
+console.log(cat);
+if(cat==1){
+    peso=(parseFloat(espesor)*parseFloat(alto)*parseFloat(ancho)*parseFloat(constante))/1000;
+}else{
+    peso=(parseFloat(espesor)*parseFloat(alto)*parseFloat(ancho)*parseFloat(constante))/1000000;
+}
+var pesofinal = peso.toFixed(4);
+$("#peso").val(pesofinal);
+}
 function editarpro(id){
     //$("#dirx").val('');
     //$("#producto").val('');
