@@ -251,7 +251,7 @@
 
 
                                 </div>
-                                <form id="formcotizar" method="post" >
+                                <form id="formcotizar" method="post">
                                     <fieldset style=" border: 1px groove #ddd !important;
     padding: 0 1.4em 1.4em 1.4em !important;
     margin: 0 0 1.5em 0 !important;
@@ -261,20 +261,25 @@
     font-weight: bold !important;
     text-align: left !important;">Datos de Proveedor</legend>
                                         <div class="row">
-                                        <div class="col-md-4">
-                                                            <label>Proveedor:</label>
-                                                            <select class="form-control" id="provee">
-                                                                <option>Seleccione</option>
-                                                                <?php
+                                            <div class="col-md-3">
+                                                <label>Nr De Factura</label>
+                                                <input type="text" class="form-control" id="numfactura"
+                                                    name="numfactura" placeholder="Ingrese Numero de Factura...">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label>Proveedor:</label>
+                                                <select class="form-control" id="provee">
+                                                    <option>Seleccione</option>
+                                                    <?php
                                                                   foreach ($prove as $value) {
                                                                   ?>
-                                                                <option value="<?php echo $value['id_proveedores']; ?>">
-                                                                    <?php echo $value['razon_social']; ?></option>
-                                                                <?php
+                                                    <option value="<?php echo $value['id_proveedores']; ?>">
+                                                        <?php echo $value['razon_social']; ?></option>
+                                                    <?php
                                                                   }
                                                                    ?>
-                                                            </select>
-                                                        </div>
+                                                </select>
+                                            </div>
                                             <div class="col-md-1">
                                                 <label></label>
                                                 <a onclick="buscarcli();"
@@ -282,7 +287,8 @@
                                             </div>
                                             <div class="col-md-1">
                                                 <label></label>
-                                                <a onclick="registrarCompra();" class="btn btn-success form-control">Grabar</a>
+                                                <a onclick="registrarCompra();"
+                                                    class="btn btn-success form-control">Grabar</a>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -290,7 +296,8 @@
                                                 <label>Ruc</label>
                                                 <input type="text" class="form-control" id="ruc" name="ruc"
                                                     placeholder="Ingrese Cliente..." readonly>
-                                                <input type="hidden" class="form-control" id="razon_social" name="razon_social">
+                                                <input type="hidden" class="form-control" id="razon_social"
+                                                    name="razon_social">
                                             </div>
                                             <div class="col-md-3">
                                                 <label>Direccion</label>
@@ -298,14 +305,27 @@
                                                     placeholder="Ingrese Direccion..." readonly>
                                             </div>
                                             <div class="col-md-3">
+                                                <label>Fecha De Compra</label>
+                                                <input type="date" class="form-control" id="fecha_compra"
+                                                    name="fecha_compra">
+                                            </div>
+                                            <div class="col-md-3">
                                                 <input type="hidden" class="form-control" id="id_prove" name="id_prove">
                                             </div>
-                                            <div class="col-md-2">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
                                                 <label>Total</label>
-                                                <input type="text" class="form-control" id="totalf" name="totalf" placeholder="Ingrese Total...">
+                                                <input type="text" class="form-control" id="totalf" name="totalf"
+                                                    placeholder="Ingrese Total...">
+                                            </div>         
+                                            <div class="col-md-3">
+                                                    <label>Peso Total</label>
+                                                    <input type="text" class="form-control" id="pesof" name="pesof" placeholder="Ingrese Peso Total...">
+                                            </div>
                                                 <input type="hidden" class="form-control" id="cantif" name="cantif" placeholder="Ingrese can...">
                                                 <input type="hidden" class="form-control" id="contadorf" name="contadorf">
-                                            </div>
+                                            
                                         </div>
                                     </fieldset>
                                     <!-- /.card-header -->
@@ -352,25 +372,37 @@
                                                                 <label>Codigo</label>
                                                                 <input type="text" class="form-control" id="producto"
                                                                     name="" placeholder="Ingrese Producto..." readonly>
+                                                                <input type="hidden" class="form-control" id="nombre_producto" name="" >
                                                             </div>
                                                         </div>
-                                                        <input type="hidden" class="form-control" id="idp" name="" readonly>
-                                                              
-                                                        
+                                                        <input type="hidden" class="form-control" id="idp" name=""
+                                                            readonly>
+
+
                                                     </div>
 
                                                     <div class="col-md-4">
-                                                        <label>Cantidad:</label>
+                                                        <label>Cantidad Productos:</label>
 
                                                         <input type="text" class="form-control" id="cantidad"
                                                             placeholder="Ingrese la cantidad...">
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label>Peso TM / Cant.:</label>
+                                                        <input type="text" class="form-control" id="peso"
+                                                            placeholder="Ingrese el peso...">
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <label>Venta Unidad:</label>
+                                                        <input type="text" class="form-control" id="ventauni"
+                                                            placeholder="Ingrese el venta unitario...">
                                                     </div>
                                                     <div class="col-md-8">
                                                         <label>Precio Unidad:</label>
                                                         <input type="text" class="form-control" id="preciouni"
                                                             placeholder="Ingrese el precio unitario...">
                                                     </div>
-                                                  
+
                                                     <div class="row">
 
                                                         <div class="col-md-8">
@@ -388,11 +420,14 @@
                                                     <thead>
                                                         <tr>
                                                             <th>#</th>
-                                                            <th>Cod.</th>
-                                                            <th>Producto</th>
+                                                            <th>id</th>
+                                                            <th>Codigo</th>
+                                                            <th>Descripcion</th>
                                                             <th>Cantidad</th>
+                                                            <th>Peso TM</th>
+                                                            <th>Venta Unidad</th>
                                                             <th>Precio Unidad</th>
-                                                            <th>Precio Total</th>
+                                                            <th>Venta Total</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody id="detalles">
@@ -426,7 +461,7 @@
                                             <input type="text" class="form-control" placeholder="" id="tef">
                                             <label>Direccion:</label>
                                             <input type="text" class="form-control" placeholder="" id="dire">
-                                            
+
                                         </form>
                                     </div>
                                     <div class="modal-footer">

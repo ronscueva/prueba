@@ -64,6 +64,7 @@ if ($fun==1){
 		$row_array['codigo']=$row['codigo_producto'];
 		$row_array['nombres']=$row['nombre'];
 		$row_array['precio_unidad']=$row['precio_venta'];
+		
 		array_push($return_arr,$row_array);
     }
    echo json_encode($return_arr);

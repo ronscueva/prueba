@@ -38,6 +38,8 @@ function buscarprod() {
                 $("#preciouni").val(data[0]['precio_unidad']);
                 $("#producto").val(data[0]['codigo']);
                 $("#idp").val(data[0]['idp']);
+                $("#nombre_producto").val(data[0]['nombres']);
+                $("#cantidad").val('1');
             } else {
                 Toast.fire({ icon: 'error', title: 'No se encontro Cliente o No Existe, Verifique en el Modulo de Clientes!!!.' })
             }
@@ -55,23 +57,33 @@ function agregar() {
     
     var contador = $("#contadorf").val();
     var cantidadtotal = $("#cantif").val();
-	var proveedor = $("#razon_social").val();
+	var descripcion = $("#nombre_producto").val();
 	var producto = $("#producto").val();
-	var cantidad = $("#cantidad").val();idp
+	var cantidad = $("#cantidad").val();
 	var preciouni = $("#preciouni").val();
+    var ventauni = $("#ventauni").val();
+    var pesouni = $('#peso').val();
+    var pesof = $('#pesof').val();
     var idp = $("#idp").val();
-	var oper = parseFloat(preciouni) * parseInt(cantidad);
+	var oper = parseFloat(ventauni) * parseInt(pesouni);
     
 	var total = oper;
 	//console.log(proveedor);
     
     var fin = 0
     var cfin = 0
-
+   
 
      contador ++
 		
-      
+    
+     if (pesof == "") {
+    
+		pesof = 0 + parseFloat(pesouni);
+	} else {
+       
+		pesof = parseFloat(pesof) + parseFloat(pesouni);
+	}
 
     if (totales == "") {
     
@@ -94,9 +106,15 @@ function agregar() {
            idp + "'>" + idp + 
            "</td> <td><input type='text' hidden='true' name='productogrid[]' value='" +
            producto + "'>" + producto +
+           "</td><td><input hidden='true' name='descripciongrid[]' value='" + 
+           descripcion + "'>" + descripcion + 
             "</td><td><input hidden='true' name='cantidadgrid[]' value='" + 
             cantidad + "'>" + cantidad + 
-           "</td><td><input hidden='true' name='preciunigrid[]' value='" + 
+           "</td><td><input hidden='true' name='pesogrid[]' value='" + 
+           pesouni + "'>" + pesouni +
+           "</td><td><input hidden='true' name='ventaunigrid[]' value='" + 
+           ventauni + "'>" + ventauni +
+            "</td><td><input hidden='true' name='preciunigrid[]' value='" + 
            preciouni + "'>" + preciouni +
             "</td><td><input hidden='true' name='totalgrid[]' value='" + 
             total + "'>" + total + 
@@ -105,7 +123,7 @@ function agregar() {
            cont++;
         //limpiar();
         console.log(fin);
-        
+        $("#pesof").val(pesof);
         $("#totalf").val(fin);
         $("#cantif").val(cfin);
         $("#contadorf").val(contador);
@@ -152,7 +170,7 @@ function registrarCompra(){
                 if (data!=0){
                     var Toast = Swal.mixin({toast: true,position: 'top-end',showConfirmButton: false,timer: 3000});
                     Toast.fire({icon: 'success',title: 'Se Registro al Vendedor con Exito.'})
-                    location.reload();
+                   // location.reload();
                 }else
                 {
                     $(document).Toasts('create', 
@@ -162,7 +180,7 @@ function registrarCompra(){
                     subtitle: 'Alerta',
                     body: 'Ocurrio un Error al Registrar al Vendedor!!!.'
                     })
-                    location.reload();
+                  //  location.reload();
                 }
             }
         })
