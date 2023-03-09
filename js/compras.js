@@ -142,24 +142,7 @@ function eliminar(index) {
     $("#fila" + index).remove();
 }
 function registrarCompra(){
-    //var producto=$("#producto").val();
-    //var idproveedor     =$("#id_prove").val();
-    //var cantidad    =$("#cantif").val();
-    //var total    =$("#totalf").val();
-//
-    //    var Toast = Swal.mixin({toast: true,position: 'top-end',showConfirmButton: false,timer: 3000});
-    //    if (idproveedor==""){
-    //                Toast.fire({icon: 'error',title: 'Debe de Ingresar el Codigo.'})
-    //                return;
-//
-    //    }else if (cantidad==""){
-    //                Toast.fire({icon: 'error',title: 'Debe de Ingresar el Precio Venta'})
-    //                return;
-    //    }
-    //    else if (total==""){
-    //        Toast.fire({icon: 'error',title: 'Debe de Ingresar el Precio Venta'})
-    //        return;
-    //    }
+   
         
         $.ajax({
             type:"post",

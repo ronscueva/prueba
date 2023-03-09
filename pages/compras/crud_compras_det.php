@@ -36,6 +36,14 @@ while ($cont < $contador) {
 	$togrid=$totalgrid[$cont];
 	$prgrid=$productogrid[$cont];
 // INSERT CABEBECERA
+
+
+$insertmateria="INSERT INTO empp_tb_materia(descripcion,codigo,dimensiones,espesor,ancho,largo,peso_cant,v_unitario,p_unitario,v_total)
+                                     VALUES('$idcompra','$prgrid','$pesofgrid',$precigrid,$ventafgrid,$cantgrid,$togrid,NOW())";	
+                                      //  echo $insertdet;die();						
+$ejecdet=mysqli_query($con,$insertmateria);
+
+
 $insertdet="INSERT INTO empp_tb_detalle_compra(id_compra,id_producto,peso,precio_unidad,venta_unidad,cantidad,total_subproducto,fecha)
                                         VALUES('$idcompra','$prgrid','$pesofgrid',$precigrid,$ventafgrid,$cantgrid,$togrid,NOW())";			
                                       //  echo $insertdet;die();						

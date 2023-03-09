@@ -295,7 +295,7 @@
                     <td><?php echo $value['ruc']; ?></td>
                     <td><?php echo $value['cantidad_total']; ?></td>
                     <td><?php echo $value['precio_total']; ?></td>
-                    <td><a data-toggle="modal" data-target="#exampleModal" onclick="editarcli(<?php echo $value['id_reg']; ?>)" class="btn btn-warning">Detalle</a></td>
+                    <td><a data-toggle="modal" data-target="#exampleModal" onclick="editarcli(<?php echo $value['id']; ?>)" class="btn btn-warning">Detalle</a></td>
                   </tr>
                     <?php
                   }
