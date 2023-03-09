@@ -19,28 +19,42 @@ $cot=mysqli_query($con,"SELECT MAX(id) as id  from empp_tb_compra");
 $ids= mysqli_fetch_array($cot);
 
 $idcompra=$ids['id'];
-$productogrid=$_POST['codigodetallegrid'];
+$productogrid=$_POST['productogrid'];
 $totalgrid=$_POST['totalgrid'];
 $preciunigrid=$_POST['preciunigrid'];
 $ventaunigrid=$_POST['ventaunigrid'];
 $cantidadgrid=$_POST['cantidadgrid'];
 $pesogrid=$_POST['pesogrid'];
+//
+$descripciongrid=$_POST['descripciongrid'];
+$dimensionesgrid=$_POST['dimensionesgrid'];
+$epesorgrid=$_POST['epesorgrid'];
+$largogrid=$_POST['largogrid'];
+$anchogrid=$_POST['anchogrid'];
+
 //$cant=$_POST['conteo'];
-//var_dump($pesogrid);
+var_dump($largogrid);
 $cont=0;
 while ($cont < $contador) {
 	$cantgrid=$cantidadgrid[$cont];
 	$precigrid=$preciunigrid[$cont];
   $pesofgrid=$pesogrid[$cont];
   $ventafgrid=$ventaunigrid[$cont];
+  //
+  $dimensiongrid=$dimensionesgrid[$cont];
+  $epesogrid=$epesorgrid[$cont];
+  $larggrid=$largogrid[$cont];
+  $anchgrid=$anchogrid[$cont];
+  $descripgrid=$descripciongrid[$cont];
+  //
 	$togrid=$totalgrid[$cont];
 	$prgrid=$productogrid[$cont];
 // INSERT CABEBECERA
 
 
-$insertmateria="INSERT INTO empp_tb_materia(descripcion,codigo,dimensiones,espesor,ancho,largo,peso_cant,v_unitario,p_unitario,v_total)
-                                     VALUES('$idcompra','$prgrid','$pesofgrid',$precigrid,$ventafgrid,$cantgrid,$togrid,NOW())";	
-                                      //  echo $insertdet;die();						
+$insertmateria="INSERT INTO empp_tb_materia(id_compra,descripcion,     codigo,       dimensiones,    espesor,    ancho,    largo,   peso_cant,  v_unitario,  p_unitario,  v_total)
+                                  VALUES('$idcompra','$descripgrid','$prgrid','$dimensiongrid',$epesogrid,$anchgrid,$larggrid,$pesofgrid,'$ventafgrid','$precigrid','$togrid')";	
+                                       echo $insertmateria;die();						
 $ejecdet=mysqli_query($con,$insertmateria);
 
 

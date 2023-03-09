@@ -361,7 +361,7 @@
                                
                            </div>
                            <div class="col-md-12">
-                           <label>Producto:</label>
+                           <label>Descripcion:</label>
                            <input type="text" class="form-control" id="nombre_producto" name="" placeholder="Ingrese Producto...">
                            </div>
                            <div class="row">
@@ -446,6 +446,10 @@
                                                             <th>id</th>
                                                             <th>Codigo</th>
                                                             <th>Descripcion</th>
+                                                            <th>Dimensiones</th>
+                                                            <th>Espesor</th>
+                                                            <th>Ancho</th>
+                                                            <th>Largo</th>
                                                             <th>Cantidad</th>
                                                             <th>Peso TM</th>
                                                             <th>Venta Unidad</th>

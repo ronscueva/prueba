@@ -65,6 +65,13 @@ function agregar() {
     var pesouni = $('#peso').val();
     var pesof = $('#pesof').val();
     var idp = $("#idp").val();
+    //
+    var dimensiones = $("#dimensiones").val();
+    var espesor = $("#espesor").val();
+    var largo = $("#largo").val();
+    var ancho = $("#ancho").val();
+
+    //
 	var oper = parseFloat(ventauni) * parseInt(pesouni);
     
 	var total = oper;
@@ -108,6 +115,20 @@ function agregar() {
            producto + "'>" + producto +
            "</td><td><input hidden='true' name='descripciongrid[]' value='" + 
            descripcion + "'>" + descripcion + 
+            //
+            "</td><td><input hidden='true' name='dimensionesgrid[]' value='" + 
+            dimensiones + "'>" + dimensiones + 
+           "</td><td><input hidden='true' name='epesorgrid[]' value='" + 
+           espesor + "'>" + espesor + 
+           "</td><td><input hidden='true' name='anchogrid[]' value='" + 
+           ancho + "'>" + ancho + 
+           "</td><td><input hidden='true' name='espesorgrid[]' value='" + 
+           largo + "'>" + largo + 
+           
+            //
+
+
+
             "</td><td><input hidden='true' name='cantidadgrid[]' value='" + 
             cantidad + "'>" + cantidad + 
            "</td><td><input hidden='true' name='pesogrid[]' value='" + 
