@@ -3,6 +3,7 @@
   require_once ("../../config/conexion.php");//Contiene funcion que conecta a la base de datos
 $fun      =$_POST['funcion'];
 $id       =$_POST['id'];
+$id_materia=$_POST['codmateria'];
 $producto =$_POST['producto'];
 $categoria=$_POST['categoria'];
 $constante=$_POST['subcat'];
@@ -11,7 +12,7 @@ $alto     =$_POST['alto'];
 $ancho    =$_POST['ancho'];
 $precio   =$_POST['precio'];
 $compra   =$_POST['compra'];
-
+//var_dump($id_materia);
 if ($fun==1){
 	
 if ($categoria==1) {
@@ -22,7 +23,7 @@ $peso = ($espesor * $ancho * $alto * $constante)/1000000;
 //echo $peso;die();
 
 	
-	$insert="INSERT INTO empp_tb_productos (nombre,descripcion,cantidad,id_sub_categoria,id_categoria,codigo_producto,tipo_producto,espesor,precio_compra,precio_venta,alto,ancho,peso,estado) VALUES('$producto','','0','1','$categoria','$id','$constante','$espesor','$compra','$precio','$alto','$ancho','".number_format($peso, 4, '.', ' ')."','1')";
+	$insert="INSERT INTO empp_tb_productos (id_materia,nombre,descripcion,cantidad,id_sub_categoria,id_categoria,codigo_producto,tipo_producto,espesor,precio_compra,precio_venta,alto,ancho,peso,estado) VALUES('$id_materia','$producto','','0','1','$categoria','$id','$constante','$espesor','$compra','$precio','$alto','$ancho','".number_format($peso, 4, '.', ' ')."','1')";
 	//echo $insert;die();
 	$ejec=mysqli_query($con,$insert);
 	

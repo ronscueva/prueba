@@ -9,7 +9,8 @@
     $scate= mysqli_query($con,"SELECT * FROM empp_tb_sub_categoria");
 
     $tipo= mysqli_query($con,"SELECT * FROM empp_tb_tipo_producto");
-
+    $listacli= mysqli_query($con,"SELECT * FROM empp_tb_materia ");
+    $listadocli=mysqli_fetch_array($listacli);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -301,9 +302,40 @@
     font-weight: bold !important;
     text-align: left !important;">REGISTRO DE PRODUCTOS</legend>
                     <form>
+                  
                     <div class="row">
+
+                    <div class="col-md-4">
+                        <label>Codigo Materia</label>
+                        
+                    <select onchange="selectNit(event)" class="form-control" id="codmateria" name="codmateria"  data-placeholder="Ingrese el Codigo" style="width: 100%;">
+                      <?php 
+                      foreach ($listacli as $valuer) {
+                        ?>
+                      <option data-nit="<?php echo $valuer['descripcion'] ?>" value="<?php echo $valuer['id_materia'] ?>"><?php echo $valuer['codigo'] ?></option>
+
+                        <?php
+                      }
+                      ?>
+                    </select>
+                  </div>
+
+                      
+                        
+                      <div class="col-md-8">
+                        <label>Descripcion Materia:</label>
+                
+                        <input type="text" class="form-control" id="descripmateria" placeholder="Ingrese el codigo...">
+                      </div>   
+
+
+
+                    </div>
+
+
+                  <div class="row">
                       <div class="col-md-4">
-                        <label>Codigo:</label>
+                        <label>Codigo Producto:</label>
                         <input type="text" id="codigo" name="codigo" hidden="true">
                         <input type="text" class="form-control" id="dirx" placeholder="Ingrese el codigo...">
                       </div>
@@ -522,7 +554,8 @@
 <script src="../../plugins/jquery/jquery.min.js"></script>
 <script src="../../js/productos.js"></script>
 <!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap 4 -->
+<!-- <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script> -->
 <!-- DataTables  & Plugins -->
 <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -530,19 +563,20 @@
 <script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
 <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="../../plugins/jszip/jszip.min.js"></script>
-<script src="../../plugins/pdfmake/pdfmake.min.js"></script>
-<script src="../../plugins/pdfmake/vfs_fonts.js"></script>
+<!-- <script src="../../plugins/jszip/jszip.min.js"></script> -->
+<!-- <script src="../../plugins/pdfmake/pdfmake.min.js"></script>
+<script src="../../plugins/pdfmake/vfs_fonts.js"></script> -->
 <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <!-- AdminLTE App -->
+<script src="../../plugins/select2/js/select2.full.min.js"></script>
 <script src="../../dist/js/adminlte.min.js"></script>
 <script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
 <!-- Toastr -->
 <script src="../../plugins/toastr/toastr.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
+<!-- <script src="../../dist/js/demo.js"></script> -->
 <!-- Page specific script -->
 <script>
   $(function () {

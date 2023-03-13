@@ -448,8 +448,8 @@
                                                             <th>Descripcion</th>
                                                             <th>Dimensiones</th>
                                                             <th>Espesor</th>
-                                                            <th>Ancho</th>
                                                             <th>Largo</th>
+                                                            <th>Ancho</th>
                                                             <th>Cantidad</th>
                                                             <th>Peso TM</th>
                                                             <th>Venta Unidad</th>

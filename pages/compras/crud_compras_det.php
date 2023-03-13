@@ -33,7 +33,7 @@ $largogrid=$_POST['largogrid'];
 $anchogrid=$_POST['anchogrid'];
 
 //$cant=$_POST['conteo'];
-var_dump($largogrid);
+//var_dump($largogrid);
 $cont=0;
 while ($cont < $contador) {
 	$cantgrid=$cantidadgrid[$cont];
@@ -51,14 +51,21 @@ while ($cont < $contador) {
 	$prgrid=$productogrid[$cont];
 // INSERT CABEBECERA
 
-
 $insertmateria="INSERT INTO empp_tb_materia(id_compra,descripcion,     codigo,       dimensiones,    espesor,    ancho,    largo,   peso_cant,  v_unitario,  p_unitario,  v_total)
                                   VALUES('$idcompra','$descripgrid','$prgrid','$dimensiongrid',$epesogrid,$anchgrid,$larggrid,$pesofgrid,'$ventafgrid','$precigrid','$togrid')";	
-                                       echo $insertmateria;die();						
+                                      // echo $insertmateria;die();						
 $ejecdet=mysqli_query($con,$insertmateria);
+//LLAMAR ID MATERERIA CREADO
+$materia=mysqli_query($con,"SELECT MAX(id_materia) as id  from empp_tb_materia");
+$idss= mysqli_fetch_array($materia);
+$materiaid=$idss['id'];
+//INSERT DE INVENTARIO
+$insertinventario="INSERT INTO empp_tb_inventario(id_produc,tipo_producto,stock,fecha_mof)
+                                  VALUES('$materiaid','m','1',NOW())";	
+                                       //echo $insertinventario;die();						
+$ejecdet=mysqli_query($con,$insertinventario);
 
-
-$insertdet="INSERT INTO empp_tb_detalle_compra(id_compra,id_producto,peso,precio_unidad,venta_unidad,cantidad,total_subproducto,fecha)
+$insertdet="INSERT INTOz empp_tb_detalle_compra(id_compra,id_producto,peso,precio_unidad,venta_unidad,cantidad,total_subproducto,fecha)
                                         VALUES('$idcompra','$prgrid','$pesofgrid',$precigrid,$ventafgrid,$cantgrid,$togrid,NOW())";			
                                       //  echo $insertdet;die();						
 $ejecdet=mysqli_query($con,$insertdet);

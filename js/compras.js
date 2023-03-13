@@ -120,11 +120,12 @@ function agregar() {
             dimensiones + "'>" + dimensiones + 
            "</td><td><input hidden='true' name='epesorgrid[]' value='" + 
            espesor + "'>" + espesor + 
-           "</td><td><input hidden='true' name='anchogrid[]' value='" + 
-           ancho + "'>" + ancho + 
-           "</td><td><input hidden='true' name='espesorgrid[]' value='" + 
+           "</td><td><input hidden='true' name='largogrid[]' value='" + 
            largo + "'>" + largo + 
            
+           "</td><td><input hidden='true' name='anchogrid[]' value='" + 
+           ancho + "'>" + ancho + 
+         
             //
 
 
@@ -154,6 +155,14 @@ function agregar() {
         $("#preciouni").val('');
         $("#cantidad").val('');
         $("#total").val('');
+        $("#producto").val('');
+        $("#nombre_producto").val('');
+        $("#dimensiones").val('');
+        $("#espesor").val('');
+        $("#largo").val('');
+        $("#ancho").val('');
+        $("#peso").val('');
+        $("#ventauni").val('');
 
     } else {
         alert("Error al ingresar el detalle del ingreso, revise los datos del articulo");
@@ -174,7 +183,7 @@ function registrarCompra(){
                 if (data!=0){
                     var Toast = Swal.mixin({toast: true,position: 'top-end',showConfirmButton: false,timer: 3000});
                     Toast.fire({icon: 'success',title: 'Se Registro al Vendedor con Exito.'})
-                   // location.reload();
+                    location.reload();
                 }else
                 {
                     $(document).Toasts('create', 
@@ -184,7 +193,7 @@ function registrarCompra(){
                     subtitle: 'Alerta',
                     body: 'Ocurrio un Error al Registrar al Vendedor!!!.'
                     })
-                  //  location.reload();
+                    location.reload();
                 }
             }
         })

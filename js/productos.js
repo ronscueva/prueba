@@ -125,6 +125,7 @@ function editarpro(id){
     var ancho   =$("#ancho").val();
     var compra  =$("#precioc").val();
     var venta   =$("#preciov").val();
+    var codmateria   =$("#codmateria").val();
 
         var Toast = Swal.mixin({toast: true,position: 'top-end',showConfirmButton: false,timer: 3000});
         if (id==""){
@@ -146,7 +147,7 @@ function editarpro(id){
         $.ajax({
             type:"post",
             url:"crud_productos.php",
-            data:"funcion="+1+"&id="+id+"&producto="+producto+"&categoria="+cat+"&subcat="+scat+"&espesor="+espesor+"&alto="+alto+"&ancho="+ancho+"&precio="+venta+"&compra="+compra,
+            data:"funcion="+1+"&id="+id+"&producto="+producto+"&categoria="+cat+"&subcat="+scat+"&espesor="+espesor+"&alto="+alto+"&ancho="+ancho+"&precio="+venta+"&compra="+compra+"&codmateria="+codmateria,
             success:function(data){
                 console.log(data);
                 if (data==1){
@@ -202,4 +203,8 @@ function editarpro(id){
             }
         })
     }
+    function selectNit(e) {
+        var nit =  e.target.selectedOptions[0].getAttribute("data-nit")
+        document.getElementById("descripmateria").value = nit; 
+        } 
     
