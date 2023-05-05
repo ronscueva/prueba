@@ -6,7 +6,7 @@ session_start();
 $users=$_SESSION['user'];
 $id=$_REQUEST['id'];
 $con=mysqli_connect("a2plcpnl0863.prod.iad2.secureserver.net","bd_sistema","%Sistemas0rb1n3t@","siscontrol");
-$consul="SELECT a.dolar,a.id_reg,a.n_documento,b.nombres,b.direccion,a.descuento,a.precio_texto,a.fecha_reg,a.estado,b.n_doc,d.nombre,c.cantidad,c.precio,c.total FROM empp_tb_cotizacion a inner join empp_tb_cliente b on b.id_reg=a.id_cliente inner join empp_tb_cotizacion_det c on c.id_regcab=a.id_reg inner join empp_tb_productos d on d.id_produc=c.id_producto WHERE a.id_reg='$id'";
+$consul="SELECT a.dolar,a.id_reg,a.n_documento,b.nombres,b.direccion,a.descuento,a.precio_texto,a.fecha_reg,a.estado,b.n_doc,d.nombre,c.cantidad,c.precio,c.total,d.peso,a.moneda_cambio FROM empp_tb_cotizacion a inner join empp_tb_cliente b on b.id_reg=a.id_cliente inner join empp_tb_cotizacion_det c on c.id_regcab=a.id_reg inner join empp_tb_productos d on d.id_produc=c.id_producto WHERE a.id_reg='$id'";
 //$cambio="https://api.apis.net.pe/v1/tipo-cambio-sunat?fecha=".date("d-m-Y");
 $lista= mysqli_query($con,$consul);
 $listado=mysqli_fetch_array($lista);
@@ -19,6 +19,7 @@ $cli=$listado['nombres'];
 $dir=$listado['direccion'];
 $fech=$listado['fecha_reg'];
 $doc=$listado['n_doc'];
+$money=$listado['moneda_cambio'];
 $subtotal=number_format($listado['precio_texto'],2,',','');
 $totalf=floatval($listado['precio_texto']) * 1.18;
 $igv=floatval($totalf)- floatval($subtotal);
@@ -65,7 +66,7 @@ function Header()
     global $doc;
     global $dolar;
     global $venta;
-    //global $totdolar;
+    global $money;
     // Logo
     $this->Image('logo_acerperu.png',10,8,33);
     // Arial bold 15
@@ -74,15 +75,18 @@ function Header()
     $this->Cell(80);
     // Título
     $this->SetX(147);
-      $this->SetFillColor(64,98,163);
+    $this->SetFillColor(64,98,163);
+    $this->SetX(147);
+    $this->Cell(57,10,'C  O  T  I  Z  A C  I  O N',0,1,'L',FALSE);
     $this->SetTextColor(255,255,255);
+    $this->SetX(147);
     $this->Cell(57,10,'RUC: 20609324369',1,1,'L',TRUE);
     $this->SetX(147);
     $this->SetTextColor(0,0,0);
     $this->Cell(57,10,$coti,1,1,'L');
 
     //$this->Cell(30,10,'Cliente'.$cli,0,1,'C');
-    $this->Ln(-2);    
+    $this->Ln(-9);    
     $this->SetX(50);
     $this->SetFont('Arial','BI',15);
     $this->MultiCell(60,6,'ACEROS Y PERFILES PERUANOS S.A.C',0,'C');
@@ -90,13 +94,13 @@ function Header()
     $this->Ln(2);
     $this->SetX(51);
     $this->MultiCell(100,3,utf8_decode('Dirección: Mz C Lote 35 Asoc Los Rosales de Chillon - Carabayllo - Lima - Lima'),0,'L');
-    $this->Ln(-15);
+    $this->Ln(-10);
     $this->SetX(148);
     $this->Cell(30,3,'Celular: 955-188-891',0,1,'C');
     $this->SetX(160);
     $this->Cell(30,10,'Correo :alberto.apaza97@gmail.com',0,1,'C');
     $this->SetFont('Arial','BI',10);
-    $this->Ln(3);
+    $this->Ln(-1);
     $this->SetX(51);
     $this->Cell(30,10,utf8_decode('"ACERPERU Tu aliado para la construcción"'),0,1,'L');
     $this->Cell(30,10,"----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------",0,1,'C');
@@ -115,7 +119,7 @@ function Header()
     $this->Cell(30,5,utf8_decode('Atención:'),0,0,'L');
     $this->Cell(30,5,utf8_decode($venta),0,0,'L');
     $this->SetX(145);
-    $this->Cell(30,5,utf8_decode('Tipo de Cambio:    '.$dolar),0,1,'L');
+    $this->Cell(30,5,utf8_decode('Tipo de Cambio:    '.$money),0,1,'L');
     $this->SetX(10);
     //$this->Cell(30,5,utf8_decode('Ejecutivo de Ventas:'),0,0,'L');
     //$this->SetX(145);
@@ -125,31 +129,87 @@ function Header()
         $this->SetFont('Arial','BI',9);
         $this->SetFillColor(64,98,163);
     $this->SetTextColor(255,255,255);
-    $this->Cell(10,10,utf8_decode('ITEM'),1,0,'L',true);
-    $this->Cell(20,10,utf8_decode('CANTIDAD'),1,0,'L',true);
-    $this->Cell(15,10,utf8_decode('UNIDAD'),1,0,'L',true);
+    //$this->Cell(10,10,utf8_decode('ITEM'),1,0,'L',true);
+    $this->Cell(12,10,utf8_decode('CANT.'),1,0,'L',true);
+    $this->Cell(12,10,utf8_decode('UNID.'),1,0,'L',true);
     $this->Cell(69,10,utf8_decode('DESCRIPCIÓN'),1,0,'L',true);
     $this->MultiCell(12,5,utf8_decode('PESO UNT.'),1,'L',true);
     $this->Ln(-10);
-    $this->SetX(136);
-    $this->MultiCell(15,5,utf8_decode('PESO TOTAL'),1,'L',true);
+    $this->SetX(115);
+    $this->Cell(26,10,utf8_decode('TIPO ENTREGA'),1,0,'L',true);
+    //$this->Ln(-10);
+    $this->SetX(141);
+    $this->MultiCell(15,5,utf8_decode('PRECIO UNIT. $.'),1,'L',true);
     $this->Ln(-10);
-    $this->SetX(151);
-    $this->MultiCell(15,5,utf8_decode('VENTA UNIT. $'),1,'L',true);
+    $this->SetX(156);
+    $this->MultiCell(18,10,utf8_decode('VALOR. $.'),1,'L',true);
     $this->Ln(-10);
-    $this->SetX(166);
-    $this->MultiCell(18,5,utf8_decode('VENTA UNIT. S/.'),1,'L',true);
-    $this->Ln(-10);
-    $this->SetX(184);
-    $this->MultiCell(18,5,utf8_decode('SUB TOTAL'),1,'L',true);
+    $this->SetX(174);
+    $this->MultiCell(29,5,utf8_decode('PRECIO UNIT. INCLUIDO IGV S/.'),1,'L',true);
     $this->SetTextColor(0,0,0);
 
 
 
 
     // Salto de línea
-    $this->Ln(5);
+    $this->Ln(3);
 }
+function RoundedRect($x, $y, $w, $h, $r, $corners = '1234', $style = '')
+    {
+        $k = $this->k;
+        $hp = $this->h;
+        if($style=='F')
+            $op='f';
+        elseif($style=='FD' || $style=='DF')
+            $op='B';
+        else
+            $op='S';
+        $MyArc = 4/3 * (sqrt(2) - 1);
+        $this->_out(sprintf('%.2F %.2F m',($x+$r)*$k,($hp-$y)*$k ));
+
+        $xc = $x+$w-$r;
+        $yc = $y+$r;
+        $this->_out(sprintf('%.2F %.2F l', $xc*$k,($hp-$y)*$k ));
+        if (strpos($corners, '2')===false)
+            $this->_out(sprintf('%.2F %.2F l', ($x+$w)*$k,($hp-$y)*$k ));
+        else
+            $this->_Arc($xc + $r*$MyArc, $yc - $r, $xc + $r, $yc - $r*$MyArc, $xc + $r, $yc);
+
+        $xc = $x+$w-$r;
+        $yc = $y+$h-$r;
+        $this->_out(sprintf('%.2F %.2F l',($x+$w)*$k,($hp-$yc)*$k));
+        if (strpos($corners, '3')===false)
+            $this->_out(sprintf('%.2F %.2F l',($x+$w)*$k,($hp-($y+$h))*$k));
+        else
+            $this->_Arc($xc + $r, $yc + $r*$MyArc, $xc + $r*$MyArc, $yc + $r, $xc, $yc + $r);
+
+        $xc = $x+$r;
+        $yc = $y+$h-$r;
+        $this->_out(sprintf('%.2F %.2F l',$xc*$k,($hp-($y+$h))*$k));
+        if (strpos($corners, '4')===false)
+            $this->_out(sprintf('%.2F %.2F l',($x)*$k,($hp-($y+$h))*$k));
+        else
+            $this->_Arc($xc - $r*$MyArc, $yc + $r, $xc - $r, $yc + $r*$MyArc, $xc - $r, $yc);
+
+        $xc = $x+$r ;
+        $yc = $y+$r;
+        $this->_out(sprintf('%.2F %.2F l',($x)*$k,($hp-$yc)*$k ));
+        if (strpos($corners, '1')===false)
+        {
+            $this->_out(sprintf('%.2F %.2F l',($x)*$k,($hp-$y)*$k ));
+            $this->_out(sprintf('%.2F %.2F l',($x+$r)*$k,($hp-$y)*$k ));
+        }
+        else
+            $this->_Arc($xc - $r, $yc - $r*$MyArc, $xc - $r*$MyArc, $yc - $r, $xc, $yc - $r);
+        $this->_out($op);
+    }
+
+    function _Arc($x1, $y1, $x2, $y2, $x3, $y3)
+    {
+        $h = $this->h;
+        $this->_out(sprintf('%.2F %.2F %.2F %.2F %.2F %.2F c ', $x1*$this->k, ($h-$y1)*$this->k,
+            $x2*$this->k, ($h-$y2)*$this->k, $x3*$this->k, ($h-$y3)*$this->k));
+    }
 
 // Pie de página
 function Footer()
@@ -196,28 +256,33 @@ $pdf = new PDF();
 $pdf->AliasNbPages();
 $pdf->AddPage();
 $pdf->SetFont('Times','',8);
+//$pdf->RoundedRect(60, 30, 68, 46, 5, '13', 'DF');
 $cont=1;
 $conta=1;
+$pesototal=0;
 foreach ($lista as $values) {
 $cont++;
 
-$pdf->Cell(10,5,$conta++,0,0,'L');
-$pdf->Cell(20,5,utf8_decode($values['cantidad']),0,0,'L');
-$pdf->Cell(15,5,utf8_decode('UND'),0,0,'L');
+//$pdf->Cell(10,5,$conta++,0,0,'L');
+$pdf->Cell(12,5,utf8_decode($values['cantidad']),0,0,'L');
+$pdf->Cell(12,5,utf8_decode('UND'),0,0,'L');
 $pdf->Cell(69,5,utf8_decode($values['nombre']),0,0,'L');
-$pdf->Cell(12,5,'17.26',0,0,'L');
-$pdf->Cell(15,5,'1208.24',0,0,'L');
-$precioso=$values['precio'];
+$pdf->Cell(12,5,$values['peso'],0,0,'L');
+$pdf->Cell(26,5,'INMEDIATA',0,0,'C');
+$precioso=$values['total'];
 $unidolar=floatval($precioso)/$dolar;
+$precxcant=floatval($unidolar)*floatval($values['cantidad']);
 $pdf->Cell(15,5,number_format($unidolar,2,',',''),0,0,'L');
-$pdf->Cell(18,5,utf8_decode($values['precio']),0,0,'L');
-$pdf->Cell(18,5,utf8_decode($values['total']),0,1,'R');
+$pdf->Cell(18,5,number_format($precxcant,2,',',''),0,0,'L');
+$precsol=((floatval($precioso))*1.18);
+$pdf->Cell(18,5,number_format($precsol,2,',',''),0,1,'R');
 $pdf->setX(10);
 $pdf->Cell(30,1,"----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------",0,1,'L');
-if($cont>15) {
+if($cont>10) {
     $pdf->AddPage();
     $cont=1;
 }
+$pesototal += floatval($values['peso']);
 }
 $pdf->SetFont('Times','B',8);
 $pdf->SetFillColor(64,98,163);
@@ -265,5 +330,7 @@ $pdf->SetTextColor(255,255,255);
 $pdf->Cell(18,5,utf8_decode('Total S/.'),1,0,'L',true);
 $pdf->SetTextColor(0,0,0);
 $pdf->Cell(18,5,number_format($totalf,2,',',''),1,1,'R');
+$pdf->SetFont('Arial','B',12);
+$pdf->Cell(18,5,'PESO TOTAL: '.$pesototal,0,1,'L');
 $pdf->Output();
 ?>

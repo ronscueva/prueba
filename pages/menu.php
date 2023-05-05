@@ -94,6 +94,31 @@
               
             </ul>
           </li>
+           <!-- Orden de Produccion  -->
+           <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Orden de Produccion
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              
+              <li class="nav-item">
+                <a href="../orden_produccion/orden_produccion.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Agregar Orden de Produccion</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../orden_produccion/ver_orden_produccion.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Ver Orden de Produccion</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           <!-- Producto -->
           <li class="nav-item">
             <a href="#" class="nav-link">

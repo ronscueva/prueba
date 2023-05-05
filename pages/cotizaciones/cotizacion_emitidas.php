@@ -245,6 +245,26 @@ inner join empp_tb_cliente b on b.id_reg=a.id_cliente");
               </div>
               <!-- /.card-header -->
               <div class="card-body">
+                <div class="card">
+  <div class="card-header">
+    Leyenda
+  </div>
+  <div class="card-body">
+    <table>
+      <tr>
+        <td>Cotizado </td>
+        <td><div style="border-style: solid;background: white;height: 15px;width: 15px;"></div></td>
+        <td>Orden de Pedido Generada</td>
+        <td><div style="border-style: 10 solid ;background: #d4f8c0;height: 15px;width: 15px;"></div></td>
+        <td>Factura Generada</td>
+        <td><div style="border-style: 10 solid;background: #b1ccfa;height: 15px;width: 15px;"></div></td>
+        <td>Cotizacion Anulada</td>
+        <td><div style="border-style: 10 solid;background: #fdb0b0;height: 15px;width: 15px;"></div></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
@@ -310,7 +330,6 @@ inner join empp_tb_cliente b on b.id_reg=a.id_cliente");
               </div>
               <!-- edicion cliente -->
               <!--FIN  edicion cliente -->
-
               <!--  ELIMINAR COTIZACION -->
 
               <div style="margin-top:10%" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">

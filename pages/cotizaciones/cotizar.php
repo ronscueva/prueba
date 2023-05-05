@@ -342,14 +342,14 @@ $dolar=$tipoCambioSunat->compra;
                         <label>Direccion</label>
                         <input type="text" class="form-control" id="direc" name="direc" placeholder="Ingrese Direccion..." readonly>
                       </div>
-                      <div class="col-md-2">
+                      <!-- <div class="col-md-2">
                         <label>Fecha</label>
                         <input type="date" class="form-control" id="fecha" name="fecha" placeholder="Ingrese Fecha...">
-                      </div>
+                      </div> -->
                       <div class="col-md-1">
                         <label>Descuento</label>
                         <input type="text" hidden="true" class="form-control" id="telef" name="telef" placeholder="Ingrese Telefono..." readonly>
-                        <input class="form-control" type="text" name="descuento" id="descuento" value="0" placeholder="Ingrese Descuento...">
+                        <input class="form-control" type="text" name="descuento" id="descuento" value="0" placeholder="Ingrese Descuento..." readonly>
                       </div>
                       
                       <div class="col-md-1">
@@ -401,21 +401,7 @@ $dolar=$tipoCambioSunat->compra;
                         <input type="text" class="form-control" id="producto" name="" placeholder="Ingrese Producto..." readonly>
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="col-md-4">
-                        <label>Espesor</label>
-                        <input type="text" class="form-control" id="espesor" name="" placeholder="Ingrese Espesor..." readonly>
-                      </div>
-                      <div class="col-md-4">
-                        <label>Ancho</label>
-                        <input type="text" class="form-control" id="ancho" name="" placeholder="Ingrese Ancho..." readonly>
-                      </div>
-                      <div class="col-md-4">
-                        <label>Alto</label>
-                        <input type="text" class="form-control" id="alto" name="" placeholder="Ingrese Alto..." readonly>
-                      </div>
-                    </div>
-                    <div class="row">
+                     <div class="row">
                       <div class="col-md-4">
                         <label>Categoria</label>
                          <select class="form-control" id="categoria" readonly>
@@ -440,14 +426,25 @@ $dolar=$tipoCambioSunat->compra;
                     </div>
                     <div class="row">
                       <div class="col-md-4">
+                        <label>Peso</label>
+                        <input type="text" class="form-control" id="peso" name="" placeholder="Ingrese Espesor..." readonly>
+                      </div>
+                      <div class="col-md-4">
+                        <label>Descuento</label>
+                        <input type="text" class="form-control" id="descitem" name="" placeholder="Ingrese Descuento..." value="0.00">
+                      </div>
+                      <div class="col-md-4">
                         <label>Cantidad</label>
                         <input type="text"  class="form-control" id="cantidad" name="" placeholder="Ingrese Cantidad...">
                       </div>
+                    </div>
+                   
+                    <div class="row">
                    <!--<div class="col-md-0">
                         <label>Total</label>
                         <input type="text" class="form-control" id="total" name="" placeholder="Ingrese Precio total..." readonly>
                       </div> -->
-                      <div class="col-md-8">
+                      <div class="col-md-12">
                         <label></label>
                        <a onclick="agregar();" class="btn btn-danger form-control">Agregar</a>
                       </div>
@@ -461,11 +458,10 @@ $dolar=$tipoCambioSunat->compra;
                     <th>#</th>
                     <th>Codigo</th>
                     <th>Nombre</th>
-                    <th>espesor</th>
-                    <th>Ancho</th>
-                    <th>Alto</th>
-                    <th>Categoria</th>
+                    <th>peso</th>
                     <th>Precio</th>
+                    <th>Descuento</th>
+                    <th>Precio Final</th>
                     <th>Cantidad</th>
                     <th>Total</th>
                   </tr>

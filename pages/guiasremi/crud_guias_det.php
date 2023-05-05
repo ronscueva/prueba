@@ -6,8 +6,8 @@ $users=$_SESSION['user'];
 $factura      =$_POST['factura'];
 $partida      =$_POST['partida'];
 $llegada      =$_POST['llegada'];
-$fechasalih   =$_POST['fechasalih'];
-$fechasali    =$_POST['fechasali'];
+//$fechasalih   =$_POST['fechasalih'];
+//$fechasali    =$_POST['fechasali'];
 $ructranspor  =$_POST['ructranspor'];
 $transportista=$_POST['transportista'];
 $umedida      =$_POST['umedida'];
@@ -24,7 +24,7 @@ $num   = mysqli_fetch_array($corre);
 $nro   =intval($num['numero'])+1;
 $docu  ="GR-07".str_pad($nro, 8, "0", STR_PAD_LEFT);
 $insert="INSERT INTO empp_tb_guias_cab(id_factura,partida,llegada,fec_emision,fec_salida,ruc,transportista,medida,peso,chofer,placa,dni,licencia,n_documento)
-VALUES('$factura','$partida','$llegada',NOW(),'$fechasali','$ructranspor','$transportista','$umedida','$pesob','$chofer','$placa','$dni','$bevete','$docu')";
+VALUES('$factura','$partida','$llegada',NOW(),NOW(),'$ructranspor','$transportista','$umedida','$pesob','$chofer','$placa','$dni','$bevete','$docu')";
 $ejec=mysqli_query($con,$insert);
 
 $cot  =mysqli_query($con,"SELECT MAX(id_reg) as id  from empp_tb_guias_cab");

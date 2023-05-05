@@ -7,7 +7,7 @@ $users=$_SESSION['user'];
 $id=$_REQUEST['id'];
 $con=mysqli_connect("a2plcpnl0863.prod.iad2.secureserver.net","bd_sistema","%Sistemas0rb1n3t@","siscontrol");
 $consul="SELECT b.n_documento as factura,a.partida,a.llegada,a.fec_emision,a.fec_salida,a.ruc,a.transportista,a.medida,a.peso
-,a.chofer,a.placa,a.dni,a.licencia,a.n_documento as guia,c.normalizado,c.unidad,c.cantidad,d.codigo_producto,e.n_doc,e.nombres,d.nombre as producto FROM empp_tb_guias_cab a
+,a.chofer,a.placa,a.dni,a.licencia,a.n_documento as guia,c.normalizado,c.unidad,c.cantidad,d.codigo_producto,e.n_doc,e.nombres,d.nombre as producto,d.peso as pesounit FROM empp_tb_guias_cab a
 INNER JOIN empp_tb_factura_cab b on b.id_reg=a.id_factura
 INNER JOIN empp_tb_guias_det c on c.id_cab=a.id_reg
 INNER JOIN empp_tb_productos d on d.id_produc=c.codigo
@@ -219,15 +219,17 @@ $pdf->AddPage();
 $pdf->SetFont('Times','',8);
 $cont=1;
 $conta=1;
+$pesost=0;
 foreach ($lista as $values) {
 $cont++;
+$pesos= floatval($values['pesounit'])*floatval($values['cantidad']);
 
 $pdf->Cell(10,5,$conta++,0,0,'L');
-$pdf->Cell(30,10,utf8_decode(''),0,0,'L');
+$pdf->Cell(30,10,utf8_decode('---'),0,0,'C');
 $pdf->Cell(20,5,utf8_decode($values['cantidad']),0,0,'L');
 $pdf->Cell(25,5,utf8_decode($values['unidad']),0,0,'L');
 $pdf->Cell(93,5,utf8_decode($values['producto']),0,0,'L');
-$pdf->Cell(15,10,utf8_decode($values['peso']),0,1,'L');
+$pdf->Cell(15,10,number_format($pesos,3,',',''),0,1,'L');
 
 //$pdf->Cell(15,5,utf8_decode($values['normalizado']),0,0,'L');
 //$pdf->Cell(18,5,utf8_decode($values['precio']),0,0,'L');
@@ -237,11 +239,13 @@ if($cont>15) {
     $pdf->AddPage();
     $cont=1;
 }
+$pesost+=$pesos;
 }
-// $pdf->SetFont('Times','B',8);
+$pdf->Ln(5);
+$pdf->SetFont('Times','B',11);
 // $pdf->SetFillColor(64,98,163);
 // $pdf->SetTextColor(255,255,255);
-// $pdf->Cell(10,5,utf8_decode(''),0,0,'L');
+ $pdf->Cell(10,5,utf8_decode('PESO BRUTO : ').$pesost,0,0,'L');
 // $pdf->Cell(20,5,utf8_decode(''),0,0,'L');
 // $pdf->Cell(15,5,utf8_decode(''),0,0,'L');
 // $pdf->Cell(69,5,utf8_decode(''),0,0,'L');

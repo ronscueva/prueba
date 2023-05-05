@@ -21,5 +21,19 @@
       echo "<td><input  type='text' value='".$values['cantidad']."' name='cantidades[]'>".$values['cantidad']."</td>";
       echo "</tr>";
       }
+  }else if ($fun==2) {
+    $return_arr = array();
+    $lista= mysqli_query($con,"SELECT b.direccion,sum((d.peso*c.cantidad)) as peso_bruto FROM empp_tb_factura_cab a
+        inner join empp_tb_cliente b on b.id_reg=a.id_cliente
+        inner join empp_tb_factura_det c on c.id_regcab=a.id_reg
+        inner join empp_tb_productos d on d.id_produc=c.id_producto
+        WHERE a.id_reg='$id' and c.estado='1'
+group by b.direccion");
+          while ($row = mysqli_fetch_array($lista)) {
+    $row_array['direccion']=$row['direccion'];
+    $row_array['peso_bruto']=$row['peso_bruto'];
+    array_push($return_arr,$row_array);
+    }
+   echo json_encode($return_arr);
   }
 ?>

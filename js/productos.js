@@ -207,4 +207,8 @@ function editarpro(id){
         var nit =  e.target.selectedOptions[0].getAttribute("data-nit")
         document.getElementById("descripmateria").value = nit; 
         } 
-    
+    function selectProduc(e) {
+        var nit =  e.target.selectedOptions[0].getAttribute("data-nit")
+        document.getElementById("producto").value = nit; 
+        } 
+     

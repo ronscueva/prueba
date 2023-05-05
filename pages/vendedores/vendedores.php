@@ -245,13 +245,13 @@
       </div>
       <div class="modal-body">
         <label>DNI:</label>
-        <input type="text" class="form-control" id="dnix" placeholder="Ingrese Nro DNI...">
+        <input type="number" class="form-control" id="dnix"  maxlength="8"  placeholder="Ingrese Nro DNI...">
         <label>Nombres:</label>
         <input type="text" class="form-control" id="nombrex" placeholder="Ingrese Nombre completo...">
         <label>Apellidos:</label>
         <input type="text" class="form-control" id="apellidox" placeholder="Ingrese Apellidos completo...">
         <label>Telefono:</label>
-        <input type="text" class="form-control" id="telx" placeholder="Ingrese Telefono...">
+        <input type="number" class="form-control" id="telx"  maxlength="10"  placeholder="Ingrese Telefono...">
         <label>Direccion:</label>
         <input type="text" class="form-control" id="dirx" placeholder="Ingrese Direccion...">
       </div>

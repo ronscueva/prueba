@@ -250,11 +250,11 @@
       </div>
       <div class="modal-body">
         <label>Ruc:</label>
-        <input type="text" class="form-control" id="rucx" placeholder="Ingrese Nro Ruc...">
+        <input type="number" class="form-control" id="rucx" minlength="10" maxlength="20" placeholder="Ingrese Nro Ruc...">
         <label>Razon Social:</label>
         <input type="text" class="form-control" id="socialx" placeholder="Ingrese Razon Social...">
         <label>Telefono:</label>
-        <input type="text" class="form-control" id="telx" placeholder="Ingrese Telefono...">
+        <input type="number" class="form-control" id="telx" maxlength="10" placeholder="Ingrese Telefono...">
         <label>Direccion:</label>
         <input type="text" class="form-control" id="dirx" placeholder="Ingrese Direccion...">
       </div>
@@ -315,13 +315,13 @@
                     </div>
                     <div class="modal-body">
                        <form>
-                        <input type="text" class="form-control" placeholder="" hidden="true" id="ids">
+                        <input type="number" class="form-control" placeholder="" hidden="true" id="ids">
                         <label>Ruc:</label>
                         <input type="text" class="form-control" placeholder="" id="rucs">
                         <label>Razon Social:</label>
                         <input type="text" class="form-control" placeholder="" id="nomb">
                         <label>Telefono:</label>
-                        <input type="text" class="form-control" placeholder="" id="tef">
+                        <input type="number" class="form-control" placeholder="" id="tef">
                         <label>Direccion:</label>
                         <input type="text" class="form-control" placeholder="" id="dire">
                       </form>

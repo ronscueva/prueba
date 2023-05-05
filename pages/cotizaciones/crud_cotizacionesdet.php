@@ -12,7 +12,7 @@ $dolar=$_POST['dolar'];
 // }
 $totf=floatval($totalf)-floatval($descuento);
 
-$totaldolar=floatval($totf)/floatval($dolar);
+$totaldolar=floatval($totalf)/floatval($dolar);
 
 $to=number_format($totf, 2, '.', ',');
 $empresa=mysqli_query($con,"SELECT *  from empp_tb_cliente where n_doc='$ruc'");
@@ -23,31 +23,37 @@ $num= mysqli_fetch_array($corre);
 $nro=intval($num['numero'])+1;
 $docu="COT-".str_pad($nro, 8, "0", STR_PAD_LEFT);
 $cliente=$id['id_reg'];
-$insert="INSERT INTO empp_tb_cotizacion(tipo_doc,fecha_reg,id_cliente,monto,n_documento,descuento,observacion,id_usuario,precio_texto,estado,dolar)
-VALUES('1',NOW(),'$cliente','$totalf','$docu','$descuento','ninguno','$users','$totf','1','$totaldolar')";
+$insert="INSERT INTO empp_tb_cotizacion(tipo_doc,fecha_reg,id_cliente,monto,n_documento,descuento,observacion,id_usuario,precio_texto,estado,dolar,moneda_cambio)
+VALUES('1',NOW(),'$cliente','$totalf','$docu','$descuento','NINGUNO','$users','$totalf','1','$totaldolar','$dolar')";
 $ejec=mysqli_query($con,$insert);
 
 $cot=mysqli_query($con,"SELECT MAX(id_reg) as id  from empp_tb_cotizacion");
 $ids= mysqli_fetch_array($cot);
 $idcot=$ids['id'];
-$cant=$_POST['cantidaddetalle'];
-$total=$_POST['totaldetalle'];
-$precio=$_POST['preciovdetalle'];
-$codigo=$_POST['codigodetalle'];
+
+$codigo =$_POST['codigodetalle'];
+$cant   =$_POST['cantidaddetalle'];
+$precio =$_POST['preciovdetalle'];
+$dsctos =$_POST['dsctodetalle'];
+$preciof=$_POST['preciofdetalle'];
+$total  =$_POST['totaldetalle'];
 $cont=0;
+
 while ($cont < count($cant)) {
-	$canti=$cant[$cont];
-	$prec=$precio[$cont];
-	$tot=$total[$cont];
-	$cod=$codigo[$cont];
-	$texto=number_format($tot, 2, '.', ',');
+	$canti=$cant[$cont]; //cantidad
+	$prec=$precio[$cont]; //precio inicial
+	$tot=$total[$cont];  //precio totalizado
+	$cod=$codigo[$cont]; //codigo
+	$dsct=$dsctos[$cont]; //codigo
+	$precfin=$preciof[$cont]; //codigo
+	//$texto=number_format($tot, 2, '.', ',');
 
 	$prod=mysqli_query($con,"SELECT *  from empp_tb_productos where codigo_producto='$cod'");
 $idprod= mysqli_fetch_array($prod);
 $producto=$idprod['id_produc'];
 
 $insertdet="INSERT INTO empp_tb_cotizacion_det(id_regcab,id_producto,cantidad,precio,total,fecha_reg,descuento,precio_texto,estado)
-VALUES('$idcot','$producto',$canti,$prec,$tot,NOW(),'0','$texto','1')";
+VALUES('$idcot','$producto',$canti,$prec,$precfin,NOW(),'$dsct','$tot','1')";
 $ejecdet=mysqli_query($con,$insertdet);
 $cont=$cont+1;
 }

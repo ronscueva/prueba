@@ -183,7 +183,7 @@ function registrarCompra(){
                 if (data!=0){
                     var Toast = Swal.mixin({toast: true,position: 'top-end',showConfirmButton: false,timer: 3000});
                     Toast.fire({icon: 'success',title: 'Se Registro al Vendedor con Exito.'})
-                    location.reload();
+                    //location.reload();
                 }else
                 {
                     $(document).Toasts('create', 
@@ -193,7 +193,7 @@ function registrarCompra(){
                     subtitle: 'Alerta',
                     body: 'Ocurrio un Error al Registrar al Vendedor!!!.'
                     })
-                    location.reload();
+                    //location.reload();
                 }
             }
         })

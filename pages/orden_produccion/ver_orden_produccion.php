@@ -2,16 +2,25 @@
   require_once ("../../config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
   require_once ("../../config/conexion.php");//Contiene funcion que conecta a la base de datos
 
-  $facturas= mysqli_query($con,"SELECT * FROM empp_tb_factura_cab ");
-  //$listado=mysqli_fetch_array($lista);
+  $lista= mysqli_query($con,"SELECT * FROM empp_tb_materia ");
+  $listado=mysqli_fetch_array($lista);
 
+  $listamerma= mysqli_query($con,"SELECT op.*, tp.tipo_producto ,op.estado as estadoop FROM empp_tb_orden_produccion op inner join empp_tb_tipo_producto tp on tp.id_tipo = op.tipo where op.estado = 1 ");
+  $listamerm=mysqli_fetch_array($listamerma);
+
+    $cate= mysqli_query($con,"SELECT * FROM empp_tb_categoria");
+    $scate= mysqli_query($con,"SELECT * FROM empp_tb_sub_categoria");
+
+    $tipo= mysqli_query($con,"SELECT * FROM empp_tb_tipo_producto");
+    $listacli= mysqli_query($con,"SELECT * FROM empp_tb_materia ");
+    $listadocli=mysqli_fetch_array($listacli);
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Guias de Remision</title>
+  <title>AdminLTE 3 | Productos</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -23,9 +32,7 @@
   <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-  <link rel="stylesheet" href="../../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
-  <link rel="stylesheet" href="../../plugins/select2/css/select2.min.css">
-  <link rel="stylesheet" href="../../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <link rel="stylesheet" href="../../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <!-- Toastr -->
   <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">
 </head>
@@ -215,7 +222,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Guias de Remision</h1>
+            <h1>Productos</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -236,119 +243,214 @@
             <!-- /.card -->
 
             <div class="card">
-                 <form id="formguias" method="post">
               <div class="card-header">
-                <h3 class="card-title">Buscar Facturas</h3>
+                <h3 class="card-title">Orden de produccion</h3>
 
-                 <br>
-                  <!-- REGISTRO DE Proveedor -->
+
+ 
+              </div>
+        
+              <!-- /.card-header -->
+              <div class="card-body">
+                    <div class="row">
+                <div class="col-md-4">
+                  <fieldset style=" border: 1px groove #ddd !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow:  0px 0px 0px 0px #000;
+            box-shadow:  0px 0px 0px 0px #000;">
+                    <legend style="font-size: 1.2em !important;
+    font-weight: bold !important;
+    text-align: left !important;">ASOCIAR BOBINA</legend>
+                    <form>
+                  
+
                   <div class="row">
-                    <div class="col-md-8">
-                      <label>Factura</label>
-                      <div class="select2-purple">
-                    <select name="factura" id="factura" class="select2" multiple="multiple" data-placeholder="Ingrese la Factura" data-dropdown-css-class="select2-purple" style="width: 100%;">
+                      <div class="col-md-4">
+                        <label>Codigo Bobina:</label>
+                        <select onchange="selectProduc(event)" class="form-control" id="codigo" name="codigo"  data-placeholder="Ingrese el Codigo" style="width: 100%;">
                       <?php 
-                      foreach ($facturas as $valuer) {
+                      foreach ($lista as $values) {
                         ?>
-                      <option value="<?php echo $valuer['id_reg'] ?>"><?php echo $valuer['n_documento'] ?></option>
+                      <option data-nit="<?php echo $values['descripcion'] ?>" value="<?php echo $values['id_materia'] ?>"><?php echo $values['codigo'] ?></option>
 
                         <?php
                       }
                       ?>
                     </select>
-                  </div>
+                       
+                      </div>
+                      <div class="col-md-8">
+                        <label>Producto:</label>
+                        <input type="text" class="form-control" id="producto" placeholder="Ingrese el Prodcuto...">
+                      </div>
                     </div>
-                    <div class="col-md-1">
-                      <label>.</label><br>
-                      <a title="Buscar Factura" onclick="buscarfac();" class="btn btn-default"><img style="width:20px" src="../../images/lupa.png"></a>
-                      <a title="Generar Guia de Remision" onclick="genguia();" class="btn btn-default"><img style="width:20px" src="../../images/factura.png"></a>
+                            <input type="hidden" class="form-control" id="idsxcodigobobina"
+                                placeholder="Ingrese ancho...">
+                   
+                    <div class="row">
+                     
+                      <div class="col-md-4">
+                        <label></label>
+                        <div id="reg">
+                        <button onclick="registrarbobina();" type="button" class="btn btn-success form-control">Grabar</button>
+                        </div>
+                        <div id="edi" hidden="true">
+                        <button onclick="editarprod();" type="button" class="btn btn-danger form-control">Editar</button>
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                  </form>
+                  </fieldset>
+
+                  <fieldset style=" border: 1px groove #ddd !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow:  0px 0px 0px 0px #000;
+            box-shadow:  0px 0px 0px 0px #000;">
+                    <legend style="font-size: 1.2em !important;
+    font-weight: bold !important;
+    text-align: left !important;">ASOCIAR MERMA</legend>
                   <div class="row">
-                    <div class="col-md-4">
-                      <label>Punto Partida:</label>
-                      <input class="form-control" type="text" id="partida" name="partida" placeholder="Ingrese el Punto de Partida" value="CAL. LOS TULIPANES LOTE. 3B MZA. G LOTE. 3B URB. CARAPONGO" readonly> 
-                    </div>
-                    <div class="col-md-4">
-                      <label>Punto Llegada:</label>
-                      <input class="form-control" type="text" id="llegada" name="llegada" placeholder="Ingrese el Punto de Llegada" readonly>
-                    </div>
-                   <!--  <div class="col-md-2">
-                      <label>Punto Llegada:</label>
-                      <input class="form-control" type="date" id="fechasalih" name="fechasalih" placeholder="Ingrese el Punto de Llegada">
-                    </div>
-                    <div class="col-md-2">
-                      <label>Punto Llegada:</label>
-                      <input class="form-control" type="date" id="fechasali" name="fechasali" placeholder="Ingrese el Punto de Llegada">
-                    </div> -->
+                  <div class="col-md-6">
+                      <label>Cantidad:</label>
+                      <input type="number" class="form-control" id="cantidad"
+                          placeholder="Ingrese la Cantidad...">
                   </div>
-                  <div class="row">
-                    <div class="col-md-3">
-                      <label>Ruc Transportista:</label>
-                      <input type="text" class="form-control" name="ructranspor" id="ructranspor" placeholder="Ingresar Ruc">
+            
                     </div>
-                    <div class="col-md-4">
-                      <label>Transportista:</label>
-                      <input type="text" class="form-control" name="transportista" id="transportista" placeholder="Ingresar Razon Social">
+                   
+                    <div class="row">
+                   
+                        <div class="col-md-4">
+                            <label>Espesor:</label>
+                            <input type="text" class="form-control" id="espesor"
+                                placeholder="Ingrese Espesor...">
+                        </div>
+                        <div class="col-md-4">
+                            <label>Largo:</label>
+                            <input type="text" class="form-control" id="largo"
+                                placeholder="Ingrese Largo...">
+                        </div>
+                        <div class="col-md-4">
+                            <label>Ancho:</label>
+                            <input type="text" class="form-control" id="ancho"
+                                placeholder="Ingrese ancho...">
+                        </div>
+                              
                     </div>
-                    <div class="col-md-2">
-                      <label>UND Medida:</label>
-                      <input type="text" class="form-control" name="umedida" id="umedida" placeholder="" value="KGM">
+                    <div class="row">
+                    <div class="col-md-12">
+                        <label>Observacion:</label>
+                        <textarea type="text" class="form-control" id="obs" ></textarea>
+                      </div>
                     </div>
-                    <div class="col-md-2">
-                      <label>Peso Bruto:</label>
-                      <input readonly type="text" class="form-control" id="pesob" name="pesob" placeholder="Ingresar Peso Bruto">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-7">
-                      <label>Chofer</label>
-                      <input class="form-control" type="text" name="chofer" id="chofer" placeholder="Ingrese Chofer">
-                    </div>
-                    <div class="col-md-1">
-                      <label>Placa</label>
-                      <input class="form-control" type="text" name="placa" id="placa" placeholder="Ingrese Placa">
-                    </div>
-                    
-                    <div class="col-md-2">
-                      <label>Dni</label>
-                      <input class="form-control" type="text" name="dni" id="dni" placeholder="Ingrese DNI">
-                    </div>
-                    <div class="col-md-1">
-                      <label>Licencia</label>
-                      <input class="form-control" type="text" name="bevete" id="brevete" placeholder="Ingrese Brevete">
-                    </div>
-                  </div>
-  <!-- FIN REGISTRO DE CLIENTE -->
-    
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
+          
+          
+                <div class="row">
+                     
+                     <div class="col-md-4">
+                       <label></label>
+                       <div id="reg">
+                       <button onclick="registrarmerma();" type="button" class="btn btn-success form-control">Grabar</button>
+                       </div>
+                       <div id="edi" hidden="true">
+                       <button onclick="editarprod();" type="button" class="btn btn-danger form-control">Editar</button>
+                       </div>
+                     </div>
+                   </div>
+                   </fieldset>
+                   </form>
+                </div>
+                <div class="col-md-8">
                 <table id="example1" class="table table-bordered table-striped">
-                  <thead>
-                  <tr>
-                    <th style="width: 15px;">#</th>
-                    <th style="width:50px">Accion</th>
-                    <th style="width:80px">Bien normalizado</th>
-                    <th style="width:100px">Codigo de Bien</th>
-                    <th style="width:60px">Descripcion</th>
-                    <th style="width:60px">Unidad de Medida</th>
-                    <th style="width:70px">Cantidad</th>
-                  </tr>
-                  </thead>
-                  <tbody id="dettable">                  
-                  </tbody>              
-                </table>
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width:5%">#</th>
+                                                        <th style="width:11%">Codigo</th>
+                                                        <th>Nombre</th>
+                                                        <th style="width:10%">Cantidad</th>
+                                                        <th style="width:10%">Espesor</th>
+                                                        <th style="width:10%">Largo</th>
+                                                        <th style="width:10%">Ancho</th>
+                                                        <th style="width:10%">Estado</th>
+                                                        <th style="width:18%">Asociar</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                         $cont=1;
+                                                         foreach ($listamerma as $value) {
+
+                                                           ?>
+                                                    <tr>
+                                                        <td><?php echo $cont++; ?></td>
+                                                        <td><?php echo $value['id_orden_pedido']; ?></td>
+                                                        <td><?php echo $value['tipo_producto']; ?></td>
+                                                        <td><?php echo $value['cantidad']; ?></td>
+                                                        <td><?php echo $value['espesor']; ?></td>
+                                                        <td><?php echo $value['largo']; ?></td>
+                                                        <td><?php echo $value['ancho']; ?></td>
+                                                        <td><?php 
+                                                                if($value['estadoop'] == 1 ) { ?>
+                                                                    <a class="btn btn-warning">En espera</a>
+                                                             <?php  }elseif($value['estadoop'] == 0  ){?>
+                                                             <a class="btn btn-danger">Anulado</a>
+                                                             <?php  }elseif($value['estadoop'] == 2  ){?>
+                                                             <a class="btn btn-success">Realizado</a>
+                                                             <?php  } ?>
+                                                       </td>
+                                                        <td><a onclick="asociabobina(<?php echo $value['id_orden_pedido']; ?>)"
+                                                                class="btn btn-primary">Bobina</a>
+                                                            <a onclick="asociamerma(<?php echo $value['id_orden_pedido']; ?>)"
+                                                                class="btn btn-secondary">Merma</a>
+                                                      
+                                                        </td>
+                                                    </tr>
+                                                    <?php
+                                                    }
+                                                       ?>
+
+                                                </tbody>
+                                            </table>
+                </div>
               </div>
-
-
-            </form>
+              </div>
               <!-- edicion cliente -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Edicion Productos</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                       <form>
+                        <input type="text" class="form-control" placeholder="" hidden="true" id="ids">
+                        <label>Nombre:</label>
+                        <input type="text" class="form-control" placeholder="" id="rucs">
+                        <label>Descripcion:</label>
+                        <input type="text" class="form-control" placeholder="" id="nomb">
+                        <label>Telefono:</label>
+                        <input type="text" class="form-control" placeholder="" id="tef">
+                        <label>Direccion:</label>
+                        <input type="text" class="form-control" placeholder="" id="dire">
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                      <button onclick="edicioncli();" type="button" class="btn btn-primary">Grabar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <!--FIN  edicion cliente -->
 
-              <!--  ELIMINAR COTIZACION -->
+              <!--  ELIMINAR cliente -->
 
-              <div style="margin-top:10%" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+              <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-sm">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -359,11 +461,11 @@
                     </div>
                     <div class="modal-body">
                       <input type="text" id="idsx" hidden="true">
-                      <a>Esta usted Seguro de Eliminar la Cotizacion?</a>
+                      <a>Esta usted Seguro de Eliminar el Producto?</a>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                      <button onclick="eliminarcoti();" type="button" class="btn btn-danger">eliminar</button>
+                      <button onclick="eliminarproduc();" type="button" class="btn btn-danger">eliminar</button>
                     </div>
     </div>
   </div>
@@ -402,9 +504,10 @@
 
 <!-- jQuery -->
 <script src="../../plugins/jquery/jquery.min.js"></script>
-<script src="../../js/guias.js"></script>
+<script src="../../js/orden_produccion.js"></script>
 <!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap 4 -->
+<!-- <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script> -->
 <!-- DataTables  & Plugins -->
 <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -412,25 +515,26 @@
 <script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
 <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="../../plugins/jszip/jszip.min.js"></script>
-<script src="../../plugins/pdfmake/pdfmake.min.js"></script>
-<script src="../../plugins/pdfmake/vfs_fonts.js"></script>
+<!-- <script src="../../plugins/jszip/jszip.min.js"></script> -->
+<!-- <script src="../../plugins/pdfmake/pdfmake.min.js"></script>
+<script src="../../plugins/pdfmake/vfs_fonts.js"></script> -->
 <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
 <script src="../../plugins/select2/js/select2.full.min.js"></script>
+<script src="../../dist/js/adminlte.min.js"></script>
 <script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
 <!-- Toastr -->
 <script src="../../plugins/toastr/toastr.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
+<!-- <script src="../../dist/js/demo.js"></script> -->
 <!-- Page specific script -->
 <script>
   $(function () {
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
       "paging": true,
@@ -442,76 +546,17 @@
       "responsive": true,
     });
   });
-  $(function () {
-    //Initialize Select2 Elements
-    $('.select2').select2()
-
-    //Initialize Select2 Elements
-    $('.select2bs4').select2({
-      theme: 'bootstrap4'
-    })
-
-    //Datemask dd/mm/yyyy
-    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
-    //Datemask2 mm/dd/yyyy
-    $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
-    //Money Euro
-    $('[data-mask]').inputmask()
-
-    //Date picker
-    $('#reservationdate').datetimepicker({
-        format: 'L'
-    });
-
-    //Date and time picker
-    $('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' } });
-
-    //Date range picker
-    $('#reservation').daterangepicker()
-    //Date range picker with time picker
-    $('#reservationtime').daterangepicker({
-      timePicker: true,
-      timePickerIncrement: 30,
-      locale: {
-        format: 'MM/DD/YYYY hh:mm A'
-      }
-    })
-    //Date range as a button
-    $('#daterange-btn').daterangepicker(
-      {
-        ranges   : {
-          'Today'       : [moment(), moment()],
-          'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-          'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
-          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-          'This Month'  : [moment().startOf('month'), moment().endOf('month')],
-          'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-        },
-        startDate: moment().subtract(29, 'days'),
-        endDate  : moment()
-      },
-      function (start, end) {
-        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-      }
-    )
-
-    //Timepicker
-    $('#timepicker').datetimepicker({
-      format: 'LT'
-    })
-
-    //Bootstrap Duallistbox
-    $('.duallistbox').bootstrapDualListbox()
-
-    //Colorpicker
-    $('.my-colorpicker1').colorpicker()
-    //color picker with addon
-    $('.my-colorpicker2').colorpicker()
-
-    $('.my-colorpicker2').on('colorpickerChange', function(event) {
-      $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
-    })
-  })
+  $(document).ready(function(){
+  
+    document.getElementById('codigo').disabled=true;
+    document.getElementById('espesor').disabled=true;
+    document.getElementById('largo').disabled=true;
+    document.getElementById('ancho').disabled=true;
+    document.getElementById('cantidad').disabled=true;
+    document.getElementById('obs').disabled=true;
+  }
+  
+  );
 </script>
 </body>
 </html>

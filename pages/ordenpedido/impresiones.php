@@ -6,7 +6,7 @@ session_start();
 $users=$_SESSION['user'];
 $id=$_REQUEST['id'];
 $con=mysqli_connect("a2plcpnl0863.prod.iad2.secureserver.net","bd_sistema","%Sistemas0rb1n3t@","siscontrol");
-$consul="SELECT a.id_reg,a.n_documento,b.nombres,b.direccion,a.descuento,a.precio_texto,a.fecha_reg,a.estado,b.n_doc,d.nombre,c.cantidad,c.precio,c.total,e.n_documento as cotizacion 
+$consul="SELECT a.id_reg,a.n_documento,b.nombres,b.direccion,a.descuento,a.precio_texto,a.fecha_reg,a.estado,b.n_doc,d.nombre,c.cantidad,c.precio,c.total,e.n_documento as cotizacion ,d.peso
 FROM empp_tb_ordenpedido_cab a 
 inner join empp_tb_cliente b on b.id_reg=a.id_cliente 
 inner join empp_tb_ordenpedido_det c on c.id_regcab=a.id_reg 
@@ -141,20 +141,11 @@ function Header()
     $this->Cell(10,10,utf8_decode('ITEM'),1,0,'L',true);
     $this->Cell(20,10,utf8_decode('CANTIDAD'),1,0,'L',true);
     $this->Cell(15,10,utf8_decode('UNIDAD'),1,0,'L',true);
-    $this->Cell(69,10,utf8_decode('DESCRIPCIÓN'),1,0,'L',true);
-    $this->MultiCell(12,5,utf8_decode('PESO UNT.'),1,'L',true);
+    $this->Cell(110,10,utf8_decode('DESCRIPCIÓN'),1,0,'L',true);
+    $this->MultiCell(17,5,utf8_decode('PESO UNT.'),1,'L',true);
     $this->Ln(-10);
-    $this->SetX(136);
-    $this->MultiCell(15,5,utf8_decode('PESO TOTAL'),1,'L',true);
-    $this->Ln(-10);
-    $this->SetX(151);
-    $this->MultiCell(15,5,utf8_decode('VENTA UNIT. $'),1,'L',true);
-    $this->Ln(-10);
-    $this->SetX(166);
-    $this->MultiCell(18,5,utf8_decode('VENTA UNIT. S/.'),1,'L',true);
-    $this->Ln(-10);
-    $this->SetX(184);
-    $this->MultiCell(18,5,utf8_decode('SUB TOTAL'),1,'L',true);
+    $this->SetX(182);
+    $this->MultiCell(19,5,utf8_decode('PESO TOTAL'),1,'L',true);
     $this->SetTextColor(0,0,0);
     // Salto de línea
     $this->Ln(5);
@@ -207,72 +198,30 @@ $pdf->AddPage();
 $pdf->SetFont('Times','',8);
 $cont=1;
 $conta=1;
+$pesosuma=0;
 foreach ($lista as $values) {
 $cont++;
 
-$pdf->Cell(10,5,$conta++,0,0,'L');
-$pdf->Cell(20,5,utf8_decode($values['cantidad']),0,0,'L');
-$pdf->Cell(15,5,utf8_decode('UND'),0,0,'L');
-$pdf->Cell(69,5,utf8_decode($values['nombre']),0,0,'L');
-$pdf->Cell(12,5,'17.26',0,0,'L');
-$pdf->Cell(15,5,'1208.24',0,0,'L');
-$precioso=$values['precio'];
-//$unidolar=floatval($precioso)/$dolar;
-$pdf->Cell(15,5,'',0,0,'L');
-$pdf->Cell(18,5,utf8_decode($values['precio']),0,0,'L');
-$pdf->Cell(18,5,utf8_decode($values['total']),0,1,'R');
+$pdf->Cell(10,5,$conta++,0,0,'C');
+$pdf->Cell(20,5,utf8_decode($values['cantidad']),0,0,'C');
+$pdf->Cell(15,5,utf8_decode('UND'),0,0,'C');
+$pdf->Cell(110,5,utf8_decode($values['nombre']),0,0,'L');
+$pdf->Cell(17,5,$values['peso'],0,0,'L');
+$peso=$values['peso'];
+$cantidades=$values['cantidad'];
+$pesofinal=floatval($peso)*floatval($cantidades);
+$pdf->Cell(19,5,$pesofinal,0,1,'L');
 $pdf->setX(10);
 $pdf->Cell(30,1,"----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------",0,1,'L');
-if($cont>15) {
+if($cont>12){
     $pdf->AddPage();
     $cont=1;
 }
+$pesosuma +=$pesofinal;
 }
-// $pdf->SetFont('Times','B',8);
-// $pdf->SetFillColor(64,98,163);
-// $pdf->SetTextColor(255,255,255);
-// $pdf->Cell(10,5,utf8_decode(''),0,0,'L');
-// $pdf->Cell(20,5,utf8_decode(''),0,0,'L');
-// $pdf->Cell(15,5,utf8_decode(''),0,0,'L');
-// $pdf->Cell(69,5,utf8_decode(''),0,0,'L');
-// $pdf->Cell(12,5,utf8_decode(''),0,0,'L');
-// $pdf->Cell(15,5,utf8_decode(''),0,0,'L');
-// $pdf->Cell(15,5,utf8_decode(''),0,0,'L');
-// $pdf->Cell(18,5,utf8_decode('Sub Total'),1,0,'L',true);
-// $pdf->SetTextColor(0,0,0);
-// $pdf->Cell(18,5,$subtotal,1,1,'R');
-// $pdf->Cell(10,5,utf8_decode(''),0,0,'L');
-// $pdf->Cell(20,5,utf8_decode(''),0,0,'L');
-// $pdf->Cell(15,5,utf8_decode(''),0,0,'L');
-// $pdf->Cell(69,5,utf8_decode(''),0,0,'L');
-// $pdf->Cell(12,5,utf8_decode(''),0,0,'L');
-// $pdf->Cell(15,5,utf8_decode(''),0,0,'L');
-// $pdf->Cell(15,5,utf8_decode(''),0,0,'L');
-// $pdf->SetTextColor(255,255,255);
-// $pdf->Cell(18,5,utf8_decode('IGV'),1,0,'L',true);
-// $pdf->SetTextColor(0,0,0);
-// $pdf->Cell(18,5,number_format($igv,2,',',''),1,1,'R');
-// $pdf->Cell(10,5,utf8_decode(''),0,0,'L');
-// $pdf->Cell(20,5,utf8_decode(''),0,0,'L');
-// $pdf->Cell(15,5,utf8_decode(''),0,0,'L');
-// $pdf->Cell(69,5,utf8_decode(''),0,0,'L');
-// $pdf->Cell(12,5,utf8_decode(''),0,0,'L');
-// $pdf->Cell(15,5,utf8_decode(''),0,0,'L');
-// $pdf->Cell(15,5,utf8_decode(''),0,0,'L');
-// $pdf->SetTextColor(255,255,255);
-// $pdf->Cell(18,5,utf8_decode('Total $$'),1,0,'L',true);
-// $pdf->SetTextColor(0,0,0);
-// //$pdf->Cell(18,5,number_format($totdolar,2,',',''),1,1,'R');
-// $pdf->Cell(10,5,utf8_decode(''),0,0,'L');
-// $pdf->Cell(20,5,utf8_decode(''),0,0,'L');
-// $pdf->Cell(15,5,utf8_decode(''),0,0,'L');
-// $pdf->Cell(69,5,utf8_decode(''),0,0,'L');
-// $pdf->Cell(12,5,utf8_decode(''),0,0,'L');
-// $pdf->Cell(15,5,utf8_decode(''),0,0,'L');
-// $pdf->Cell(15,5,utf8_decode(''),0,0,'L');
-// $pdf->SetTextColor(255,255,255);
-// $pdf->Cell(18,5,utf8_decode('Total S/.'),1,0,'L',true);
-// $pdf->SetTextColor(0,0,0);
-// $pdf->Cell(18,5,number_format($totalf,2,',',''),1,1,'R');
+$pdf->Ln(5);
+$pdf->SetFont('Times','B',12);
+$pdf->Cell(110,5,utf8_decode('PESO TOTAL : ').$pesosuma,0,0,'L');
+
 $pdf->Output();
 ?>
